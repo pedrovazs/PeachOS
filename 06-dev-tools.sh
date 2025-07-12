@@ -9,7 +9,8 @@ arch-chroot /mnt/peachos /bin/bash <<EOF
 USERNAME="peach"
 
 # Ativa repositório multilib
-sed -i '/\\[multilib]/,/Include/ s/^#//' /etc/pacman.conf
+# Garante que [multilib] e Include estejam descomentados
+sed -i '/^\s*#\s*\[multilib\]/s/^#\s*//; /^\s*#\s*Include = \/etc\/pacman.d\/mirrorlist/s/^#\s*//' /etc/pacman.conf
 pacman -Sy --noconfirm
 
 # Instalando pacotes oficiais
@@ -40,7 +41,7 @@ su - \$USERNAME -c "\$HOME/.cargo/bin/rustup component add clippy rustfmt"
 su - \$USERNAME -c "\$HOME/.cargo/bin/cargo install cargo-watch"
 
 # Cria alias para carg-watch
-echo "alias cwatch='cargo watch -x run'" >> /home/\$USERNAME/.bashrc
+grep -qxF "alias cwatch='cargo watch -x run'" /home/\$USERNAME/.bashrc || echo "alias cwatch='cargo watch -x run'" >> /home/\$USERNAME/.bashrc
 
 # Instala o yay para pacotes AUR
 cd /opt
@@ -49,7 +50,13 @@ chown -R "\$USERNAME:\$USERNAME" yay
 cd yay
 su - \$USERNAME -c "cd /opt/yay && makepkg -si --noconfirm"
 cd /
-rm -rf /opt/yay
+
+# Verifica se yay foi instalado corretamente antes de remover o diretório
+if su - $USERNAME -c "command -v yay" >/dev/null 2>&1; then
+  rm -rf /opt/yay
+else
+  echo "Atenção: yay não foi instalado corretamente. Diretório /opt/yay não será removido."
+fi
 
 # Instala apps AUR (com verificação)
 AUR_PKGS=(
@@ -67,7 +74,7 @@ for pkg in \${AUR_PKGS[@]}; do
   if su - \$USERNAME -c "yay -Ss --color never \$pkg | grep -q ^aur/"; then
     su - \$USERNAME -c "yay -S --noconfirm \$pkg"
   else
-    echo "⚠️  Pacote AUR '\$pkg' não encontrado. Pulando..."
+    echo "Pacote AUR '\$pkg' não encontrado. Pulando..."
   fi
 done
 

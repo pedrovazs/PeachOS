@@ -21,12 +21,14 @@ ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 hwclock --systohc
 
 echo "Configurando locale..."
-sed -i "s/#$LOCALE/$LOCALE/" /etc/locale.gen
+if ! grep -q "^$LOCALE" /etc/locale.gen; then
+	sed -i "s/^#$LOCALE/$LOCALE/" /etc/locale.gen
+fi
 locale-gen
 echo "LANG=$LOCALE" > /etc/locale.conf
 echo "KEYMAP=$KEYMAP" > /etc/vconsole.conf
 
-echo "Configurando hosname e hosts..."
+echo "Configurando hostname e hosts..."
 echo "$HOSTNAME" > /etc/hostname
 cat <<HOSTS > /etc/hosts
 
@@ -39,13 +41,13 @@ echo "Criando usuário '$USERNAME' com senha padrão..."
 
 # Define senha do root
 echo root:"$PASSWORD" | chpasswd
-
-# Cria usuário comum e defino grupo wheel (sudo)
+useradd -m -G wheel -s /bin/bash "$USERNAME"
+# Cria usuário comum e adiciona ao grupo wheel (sudo)
 useradd -m -G wheel "$USERNAME"
 echo "$USERNAME:$PASSWORD" | chpasswd
 
 # Ativa sudo para o grupo wheel
-sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
+echo '%wheel ALL=(ALL:ALL) ALL' | EDITOR='tee -a' visudo >/dev/null
 
 EOF
 

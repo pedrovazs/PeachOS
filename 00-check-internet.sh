@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 00-check-internet.sh - Verirfica conectividade com a internet e sincronização de data/hora
+# 00-check-internet.sh - Verifica conectividade com a internet e sincronização de data/hora
 
 echo "[Etapa 00] Verificando conexão com a internet..."
 
@@ -9,7 +9,7 @@ echo "[Etapa 00] Verificando conexão com a internet..."
 if ping -q -c 1 archlinux.org >/dev/null; then
 	echo "Internet detectada!"
 else
-	echo "Sem conexão com a internet. verifique sua rede antes de prosseguir."
+	echo "Sem conexão com a internet. Verifique sua rede antes de prosseguir."
 	exit 1
 fi
 
@@ -22,12 +22,12 @@ timedatectl set-ntp true
 sleep 2
 
 # Mostra o status atual do relógio
-timedatectl status | grep -E "Time zone|Systme clock synchronized"
+timedatectl status | grep -E "Time zone|System clock synchronized"
 
 echo "Sincronização de tempo ativo"
 
 # Testa resolução de DNS com curl
-echo "[Etapa 0] Verificando resolução de DNS"
+echo "[Etapa 00] Verificando resolução de DNS"
 
 if curl -s --head https://archlinux.org | grep "HTTP/" >/dev/null; then
 	echo "DNS funcionando corretamente."

@@ -21,7 +21,7 @@ echo "Apagando tabela de partição e criando novas partições em GPT..."
 
 # Criação das partições
 parted -s "$DISK" mklabel gpt
-parted -s "$DISK" mkpart ESP fat32 1MiB 512Mib
+parted -s "$DISK" mkpart ESP fat32 1MiB 512MiB
 parted -s "$DISK" set 1 esp on
 parted -s "$DISK" mkpart primary btrfs 512MiB 100%
 
@@ -41,14 +41,14 @@ btrfs subvolume create /mnt/@
 btrfs subvolume create /mnt/@home
 btrfs subvolume create /mnt/@log
 btrfs subvolume create /mnt/@pkg
-btrfs subcolume create /mnt/@snapshots
+btrfs subvolume create /mnt/@snapshots
 
 umount /mnt
 
 # Montagem definitiva com subvolumes
 mount -o noatime,compress=zstd,space_cache=v2,subvol=@ "$ROOT" /mnt
 
-mkdir -p/mnt/{boot,home,var/log,var/cache/pacman/pkg,.snapshots}
+mkdir -p /mnt/{boot,home,var/log,var/cache/pacman/pkg,.snapshots}
 
 mount -o noatime,compress=zstd,space_cache=v2,subvol=@home "$ROOT" /mnt/home
 mount -o noatime,compress=zstd,space_cache=v2,subvol=@log "$ROOT" /mnt/var/log
