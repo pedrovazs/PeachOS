@@ -12,7 +12,7 @@ read -rp "Digite o caminho do disco (ex: /dev/sda ou /dev/nvme0n1): " DISK
 
 # Confirmação
 read -rp "Todos os dados em $DISK serão apagados. Deseja continuar? (s/N): " CONFIRMA
-if [[ "$CONFIRMA" != "s" && "&CONFIRMA" != "S"]] then
+if [[ "$CONFIRMA" != "s" && $CONFIRMA != "S"]] then
 	echo "Instalação abortada pelo usuário."
 	exit 1
 fi
