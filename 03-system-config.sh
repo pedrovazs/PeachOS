@@ -14,10 +14,8 @@ PASSWORD="peach123"
 LOCALE="pt_BR.UTF-8"
 KEYMAP="br-abnt2"
 
-echo "Configurando timezone"
-
+echo "Configurando fuso horário..."
 ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
-
 hwclock --systohc
 
 echo "Configurando locale..."
@@ -25,30 +23,28 @@ if ! grep -q "^$LOCALE" /etc/locale.gen; then
 	sed -i "s/^#$LOCALE/$LOCALE/" /etc/locale.gen
 fi
 locale-gen
-echo "LANG=$LOCALE" > /etc/locale.conf
-echo "KEYMAP=$KEYMAP" > /etc/vconsole.conf
+echo "LANG=\$LOCALE" > /etc/locale.conf
+echo "KEYMAP=\$KEYMAP" > /etc/vconsole.conf
 
 echo "Configurando hostname e hosts..."
-echo "$HOSTNAME" > /etc/hostname
+echo "\$HOSTNAME" > /etc/hostname
 cat <<HOSTS > /etc/hosts
-
 127.0.0.1	localhost
 ::1		localhost
-127.0.1.1	$HOSTNAME.localdomain $HOSTNAME
+127.0.1.1	\$HOSTNAME.localdomain \$HOSTNAME
 HOSTS
 
-echo "Criando usuário '$USERNAME' com senha padrão..."
+echo "Criando usuário '\$USERNAME' com senha padrão..."
 
 # Define senha do root
-echo root:"$PASSWORD" | chpasswd
-useradd -m -G wheel -s /bin/bash "$USERNAME"
-# Cria usuário comum e adiciona ao grupo wheel (sudo)
-useradd -m -G wheel "$USERNAME"
-echo "$USERNAME:$PASSWORD" | chpasswd
+echo root:"\$PASSWORD" | chpasswd
+useradd -m -G wheel -s /bin/bash "\$USERNAME"
+echo "\$USERNAME:\$PASSWORD" | chpasswd
 
-# Ativa sudo para o grupo wheel
-echo '%wheel ALL=(ALL:ALL) ALL' | EDITOR='tee -a' visudo >/dev/null
-
+echo "Configurando sudo para grupo wheel..."
+if ! grep -q "^%wheel ALL=(ALL:ALL) ALL" /etc/sudoers; then
+  echo '%wheel ALL=(ALL:ALL) ALL' >> /etc/sudoers
+fi
 EOF
 
 echo "Configurações básicas aplicadas com sucesso!"
