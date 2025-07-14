@@ -13,6 +13,8 @@ else
 	exit 1
 fi
 
+sleep 1
+
 echo "[Etapa 00] Verificando sincronização com o relógio da internet..."
 
 # Verifica se o serviço de sincronização de tempo está ativo
@@ -35,3 +37,5 @@ else
 	echo "DNS pode estar com problemas. Verifique suas configurações de rede."
 	exit 1
 fi
+
+sleep 3
