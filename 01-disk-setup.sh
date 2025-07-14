@@ -58,3 +58,4 @@ mount "$ESP" /mnt/boot
 
 echo "Disco $DISK particionado, formatado e montado com sucesso!"
 
+sleep 3

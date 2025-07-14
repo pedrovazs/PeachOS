@@ -7,6 +7,7 @@ echo "[Etapa 02] Instalando o sistema base..."
 # Verifica se /mnt esta montado corretamente
 if ! mountpoint -q /mnt; then
 	echo "/mnt não está montado! Execute o módulo 01-disk-setup.sh antes."
+	sleep 1
 	exit 1
 fi
 
@@ -32,3 +33,5 @@ pacstrap -K /mnt \
 genfstab -U /mnt >> /mnt/etc/fstab
 
 echo "Sistema base instalado com sucesso!"
+
+sleep 2

@@ -6,7 +6,7 @@ echo "[Etapa 06] Instalando ferramentas de desenvolvimento"
 
 arch-chroot /mnt/peachos /bin/bash <<EOF
 
-USERNAME="peach"
+USERNAME="momotaro"
 
 # Ativa repositório multilib
 # Garante que [multilib] e Include estejam descomentados
@@ -81,3 +81,5 @@ done
 EOF
 
 echo "Ferramentas de desenvolvimento instaladas com sucesso!"
+
+sleep 2
