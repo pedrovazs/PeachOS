@@ -43,6 +43,9 @@ grub-mkconfig -o /boot/grub/grub.cfg
 echo "Ativando cron para tarefas agendadas..."
 systemctl enable cronie
 
+echo "Ativando GDM"
+systemctl enable gdm
+
 echo "Limpando pacotes órfãos e atualizando..."
 orphans=\$(pacman -Qtdq)
 if [ -n "\$orphans" ]; then
