@@ -4,7 +4,7 @@
 
 echo "[Etapa 06] Instalando ferramentas de desenvolvimento"
 
-arch-chroot /mnt/peachos /bin/bash <<EOF
+arch-chroot /mnt/home /bin/bash <<EOF
 
 USERNAME="momotaro"
 
