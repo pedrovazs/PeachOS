@@ -1,0 +1,118 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Paleta oficial PeachOS (fonte da verdade: themes/palette.json)
+palette = 'peachos'
+
+[palettes.peachos]
+cream       = '#FFF8F5'
+peach_mist  = '#FDEEE8'
+peach       = '#E8956D'
+peach_rose  = '#F4C2B0'
+lavender    = '#C4A8D4'
+blossom     = '#E8A0B8'
+deep_plum   = '#2D2433'
+muted_plum  = '#6B5B7A'
+
+# Layout: separadores em powerline
+format = """
+[](fg:peach)\
+$os\
+$username\
+[](bg:lavender fg:peach)\
+$directory\
+[](bg:muted_plum fg:lavender)\
+$git_branch\
+$git_status\
+[](bg:deep_plum fg:muted_plum)\
+$rust\
+$python\
+$nodejs\
+$java\
+[](fg:deep_plum)\
+$fill\
+$cmd_duration\
+$line_break\
+$character"""
+
+add_newline = true
+
+[os]
+disabled = false
+style = "bg:peach fg:cream bold"
+
+[os.symbols]
+Arch = "󰣇 "
+
+[username]
+show_always = true
+style_user = "bg:peach fg:cream"
+style_root = "bg:red fg:cream bold"
+format = '[ $user ]($style)'
+disabled = false
+
+[directory]
+style = "bg:lavender fg:deep_plum bold"
+format = '[ 󰉋 $path ]($style)'
+truncation_length = 3
+truncation_symbol = '…/'
+read_only = ' 󰌾'
+
+[directory.substitutions]
+"~" = "󱂵"
+"~/dev" = "󰲋"
+"~/Documents" = "󰈙"
+"~/Downloads" = "󰇚"
+
+[git_branch]
+symbol = ' '
+style = "bg:muted_plum fg:cream"
+format = '[ $symbol$branch ]($style)'
+truncation_length = 20
+
+[git_status]
+style = "bg:muted_plum fg:peach_rose"
+format = '[$all_status$ahead_behind ]($style)'
+conflicted = '󰕚 '
+ahead = '⇡${count} '
+behind = '⇣${count} '
+diverged = '⇕ '
+untracked = '? '
+stashed = '󰏗 '
+modified = '! '
+staged = '+ '
+renamed = '» '
+deleted = '✘ '
+
+[rust]
+symbol = ' '
+style = "bg:deep_plum fg:peach_rose"
+format = '[ $symbol$version ]($style)'
+
+[python]
+symbol = ' '
+style = "bg:deep_plum fg:peach_rose"
+format = '[ $symbol$version ]($style)'
+detect_files = ['requirements.txt', 'pyproject.toml', '.python-version']
+
+[nodejs]
+symbol = ' '
+style = "bg:deep_plum fg:peach_rose"
+format = '[ $symbol$version ]($style)'
+
+[java]
+symbol = ' '
+style = "bg:deep_plum fg:peach_rose"
+format = '[ $symbol$version ]($style)'
+
+[fill]
+symbol = ' '
+
+[cmd_duration]
+min_time = 2_000
+style = "fg:muted_plum"
+format = '[󱎫 $duration]($style) '
+
+[character]
+success_symbol = '[❯](bold fg:peach)'
+error_symbol   = '[❯](bold fg:red)'
+vimcmd_symbol  = '[❮](bold fg:lavender)'
