@@ -1,0 +1,7 @@
+# /etc/udev/rules.d/60-ioschedulers.rules — PeachOS
+# SSD/NVMe: none (sem scheduler — gerenciado pelo próprio device)
+# HDD: bfq (melhor latência interativa)
+
+ACTION=="add|change", KERNEL=="sd[a-z]*", ATTR{queue/rotational}=="0", ATTR{queue/scheduler}="none"
+ACTION=="add|change", KERNEL=="nvme[0-9]*", ATTR{queue/scheduler}="none"
+ACTION=="add|change", KERNEL=="sd[a-z]*", ATTR{queue/rotational}=="1", ATTR{queue/scheduler}="bfq"

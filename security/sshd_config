@@ -1,0 +1,26 @@
+# /etc/ssh/sshd_config — PeachOS
+# SSH desabilitado por padrão na VM; habilitar só se necessário
+
+Port 22
+AddressFamily inet
+
+# Autenticação
+PermitRootLogin no
+PasswordAuthentication no
+PubkeyAuthentication yes
+AuthorizedKeysFile .ssh/authorized_keys
+PermitEmptyPasswords no
+ChallengeResponseAuthentication no
+
+# Sessão
+X11Forwarding no
+PrintMotd no
+AcceptEnv LANG LC_*
+
+# Segurança
+MaxAuthTries 3
+LoginGraceTime 30
+ClientAliveInterval 300
+ClientAliveCountMax 2
+
+Subsystem sftp /usr/lib/ssh/sftp-server

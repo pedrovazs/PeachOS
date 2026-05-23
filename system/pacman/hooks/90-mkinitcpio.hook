@@ -1,0 +1,13 @@
+# Hook: regenera initramfs ao atualizar o kernel ou pacotes críticos
+[Trigger]
+Operation = Upgrade
+Type = Package
+Target = linux
+Target = linux-lts
+Target = mkinitcpio
+Target = mkinitcpio-busybox
+
+[Action]
+Description = Regenerando initramfs...
+When = PostTransaction
+Exec = /usr/bin/mkinitcpio -P

@@ -1,0 +1,10 @@
+# Hook: regenera grub.cfg ao atualizar o GRUB
+[Trigger]
+Operation = Upgrade
+Type = Package
+Target = grub
+
+[Action]
+Description = Regenerando grub.cfg...
+When = PostTransaction
+Exec = /usr/bin/grub-mkconfig -o /boot/grub/grub.cfg
