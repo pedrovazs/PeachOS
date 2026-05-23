@@ -7,7 +7,7 @@ REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 echo "==> [60] Segurança"
 
-PKGS=(firewalld firejail aide ufw)
+PKGS=(firewalld firejail aide)
 echo "  -> Instalando pacotes de segurança..."
 pacman -S --noconfirm --needed "${PKGS[@]}"
 

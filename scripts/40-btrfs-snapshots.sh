@@ -47,8 +47,9 @@ systemctl enable --now snapper-timeline.timer
 systemctl enable --now snapper-cleanup.timer
 
 # --- grub-btrfs ---
-echo "  -> Habilitando grub-btrfs.path (monitora novos snapshots)..."
-systemctl enable --now grub-btrfs.path
+# grub-btrfs.path foi depreciado; o daemon correto é grub-btrfsd.service (requer inotify-tools)
+echo "  -> Habilitando grub-btrfsd.service (monitora novos snapshots)..."
+systemctl enable --now grub-btrfsd.service
 
 # Criar snapshot inicial antes de gerar GRUB
 echo "  -> Criando snapshot inicial de root..."

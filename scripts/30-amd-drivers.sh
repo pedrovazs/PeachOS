@@ -14,11 +14,16 @@ AMD_PKGS=(
     lib32-libva-mesa-driver
     mesa-vdpau
     lib32-mesa-vdpau
-    xf86-video-amdgpu
 )
 
 echo "  -> Instalando pacotes Mesa/AMD..."
 pacman -S --noconfirm --needed "${AMD_PKGS[@]}"
+
+# xf86-video-amdgpu é opcional — o driver modesetting (embutido no xorg-server) é o recomendado
+# para GPUs AMD modernas (GCN 1.2+). Instale xf86-video-amdgpu só se encontrar problemas
+# específicos de tearing ou se usar hardware mais antigo (Southern Islands).
+echo "  -> NOTA: xf86-video-amdgpu NÃO instalado (modesetting é o padrão recomendado)."
+echo "     Se tiver problemas de renderização 2D, instale manualmente: pacman -S xf86-video-amdgpu"
 
 # Habilitar multilib se necessário (para pacotes lib32)
 if ! grep -q '^\[multilib\]' /etc/pacman.conf; then
