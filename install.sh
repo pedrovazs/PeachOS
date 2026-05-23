@@ -20,6 +20,19 @@ ok()    { printf "${PEACH}✓${RESET}  %s\n" "$*"; }
 warn()  { printf "${PEACH}⚠${RESET}  %s\n" "$*" >&2; }
 die()   { printf "${PEACH}✗${RESET}  %s\n" "$*" >&2; exit 1; }
 
+# Limpeza global de dirs temporários, garantida mesmo em erro
+TMPDIRS=()
+cleanup() {
+    local d
+    for d in "${TMPDIRS[@]}"; do
+        [[ -n "$d" && -d "$d" ]] && rm -rf "$d"
+    done
+}
+trap cleanup EXIT
+
+# Estamos lendo dotfiles/* — habilita nullglob pra não iterar com literal vazio
+shopt -s nullglob
+
 # ============================================================
 # Pré-checks
 # ============================================================
@@ -30,7 +43,9 @@ preflight() {
     command -v sudo &>/dev/null || die "sudo não está instalado."
     [[ -f "$PKGLIST" ]] || die "Lista de pacotes não encontrada: $PKGLIST"
     [[ -f "$AURLIST" ]] || die "Lista AUR não encontrada: $AURLIST"
-    ping -c1 -W2 archlinux.org &>/dev/null || die "Sem conexão. Verifica a rede."
+    # HTTPS em vez de ping: ICMP costuma ser bloqueado em corp/firewall
+    curl -fsSI --max-time 5 https://archlinux.org >/dev/null \
+        || die "Sem conexão com archlinux.org. Verifica a rede."
     ok "Pré-checks passaram."
 }
 
@@ -38,7 +53,10 @@ preflight() {
 # Pacotes — filtra comentários e linhas em branco
 # ============================================================
 
-read_pkglist() { grep -vE '^\s*(#|$)' "$1"; }
+read_pkglist() {
+    # tr -d '\r' defende contra arquivos editados no Windows (CRLF colaria no nome)
+    tr -d '\r' < "$1" | grep -vE '^\s*(#|$)'
+}
 
 install_pacman() {
     info "Atualizando sistema e instalando pacotes oficiais"
@@ -58,7 +76,7 @@ bootstrap_paru() {
     info "Bootstrap do paru (AUR helper)"
     local tmp
     tmp=$(mktemp -d)
-    trap 'rm -rf "$tmp"' RETURN
+    TMPDIRS+=("$tmp")   # limpeza fica a cargo do trap EXIT global
     git clone https://aur.archlinux.org/paru.git "$tmp/paru"
     (cd "$tmp/paru" && makepkg -si --noconfirm)
     ok "paru instalado."
@@ -117,6 +135,10 @@ setup_sdkman() {
 set_zsh_default() {
     local zsh_path
     zsh_path=$(command -v zsh) || die "zsh não está instalado."
+    # chsh recusa shell ausente em /etc/shells. Em Arch o pacote zsh já registra,
+    # mas defendemos contra cenários onde isso falhou.
+    grep -qFx "$zsh_path" /etc/shells \
+        || die "$zsh_path não está em /etc/shells. Adicione-o e rode de novo."
     if [[ "$(getent passwd "$USER" | cut -d: -f7)" == "$zsh_path" ]]; then
         ok "zsh já é o shell padrão."
         return
