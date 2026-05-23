@@ -5,6 +5,15 @@ set -euo pipefail
 
 echo "==> [30] Drivers AMD"
 
+# Verificar multilib antes de tentar instalar pacotes lib32
+if ! grep -q '^\[multilib\]' /etc/pacman.conf; then
+    echo ""
+    echo "  ERRO: repositório [multilib] não está habilitado no pacman.conf."
+    echo "  O bloco 10 (10-mirrors-pacman.sh) deve ter sido executado primeiro."
+    echo "  Se não foi, execute-o e tente novamente."
+    exit 1
+fi
+
 AMD_PKGS=(
     mesa
     lib32-mesa
