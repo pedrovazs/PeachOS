@@ -1,0 +1,39 @@
+// PeachOS — zellij config
+// Dependência de runtime: wl-clipboard (pacman -S wl-clipboard) para copy_command funcionar no Wayland
+
+default_shell "zsh"
+pane_frames false
+mouse_mode true
+copy_command "wl-copy"
+copy_on_select false
+scroll_buffer_size 10000
+default_layout "compact"
+
+theme "peachos"
+
+themes {
+    peachos {
+        // Paleta PeachOS
+        fg          "#FFF8F5"   // cream
+        bg          "#2D2433"   // deep_plum
+        black       "#2D2433"   // deep_plum
+        red         "#E8956D"   // peach (accent para erros)
+        green       "#A8C5A0"   // verde suave (sem cor oficial — derivado)
+        yellow      "#F4C2B0"   // peach_rose
+        blue        "#C4A8D4"   // lavender
+        magenta     "#E8A0B8"   // blossom
+        cyan        "#8BBEC8"   // azul suave (derivado)
+        white       "#FFF8F5"   // cream
+        orange      "#E8956D"   // peach
+    }
+}
+
+keybinds {
+    normal {
+        // Prefixo padrão Ctrl+g mantido; apenas adições
+        bind "Ctrl n" { NewPane; }
+    }
+    locked {
+        bind "Ctrl g" { SwitchToMode "Normal"; }
+    }
+}
