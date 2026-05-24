@@ -84,7 +84,6 @@ enable_extensions() {
         "gsconnect@andyholmes.github.io"
         "Vitals@CoreCoding.com"
         "rounded-window-corners@fxgn"
-        "flypie@schneegans.github.com"
     )
 
     log "Ativando extensões"
