@@ -125,7 +125,7 @@ keybinding:
     fastForwardToRemote: "f"
     pushTag: "P"
     setUpstream: "u"
-    fetchRemote: "f"
+    fetchRemote: "<c-f>"
   commits:
     squashDown: "s"
     renameCommit: "r"

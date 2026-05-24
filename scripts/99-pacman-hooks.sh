@@ -14,9 +14,9 @@ if ! command -v paru &>/dev/null; then
     # Dependências para build
     pacman -S --noconfirm --needed base-devel git
 
-    TMPDIR=$(mktemp -d)
-    trap 'rm -rf "$TMPDIR"' EXIT
-    git clone --depth=1 https://aur.archlinux.org/paru.git "$TMPDIR/paru"
+    PARU_TMP=$(mktemp -d)
+    trap 'rm -rf "$PARU_TMP"' EXIT
+    git clone --depth=1 https://aur.archlinux.org/paru.git "$PARU_TMP/paru"
 
     # paru deve ser compilado como usuário normal — detectar quem chamou o script
     REAL_USER="${SUDO_USER:-$USER}"
@@ -26,8 +26,8 @@ if ! command -v paru &>/dev/null; then
         exit 1
     fi
 
-    chown -R "$REAL_USER:$REAL_USER" "$TMPDIR"
-    su - "$REAL_USER" -c "cd '$TMPDIR/paru' && makepkg -si --noconfirm"
+    chown -R "$REAL_USER:$REAL_USER" "$PARU_TMP"
+    su - "$REAL_USER" -c "cd '$PARU_TMP/paru' && makepkg -si --noconfirm"
     echo "  -> paru instalado."
 else
     echo "  -> paru já instalado."
