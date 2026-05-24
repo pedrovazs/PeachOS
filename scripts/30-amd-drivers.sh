@@ -34,14 +34,6 @@ pacman -S --noconfirm --needed "${AMD_PKGS[@]}"
 echo "  -> NOTA: xf86-video-amdgpu NÃO instalado (modesetting é o padrão recomendado)."
 echo "     Se tiver problemas de renderização 2D, instale manualmente: pacman -S xf86-video-amdgpu"
 
-# Habilitar multilib se necessário (para pacotes lib32)
-if ! grep -q '^\[multilib\]' /etc/pacman.conf; then
-    echo ""
-    echo "  ATENÇÃO: repositório [multilib] não está habilitado no pacman.conf."
-    echo "  Habilite-o e rode: pacman -Sy"
-    echo "  Os pacotes lib32-* não serão instalados até lá."
-fi
-
 # Verificar se amdgpu está carregado (só faz sentido em hardware físico ou VM com passthrough)
 if lspci | grep -qi 'amd\|radeon'; then
     echo "  -> GPU AMD detectada."
