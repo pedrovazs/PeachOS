@@ -135,6 +135,8 @@ gnome-system-monitor
 gnome-text-editor
 loupe
 nautilus
+# Tema GTK3 com look libadwaita (referenciado em apply-theme-user.sh)
+adw-gtk3
 # Extensões do repositório oficial
 gnome-shell-extension-appindicator
 gnome-shell-extensions

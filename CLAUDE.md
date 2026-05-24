@@ -287,6 +287,14 @@ só `dotfiles/peachd/` e o service file.
     ou o app configura automaticamente via D-Bus.
 19. **Dash to Panel vs Dash to Dock:** projeto usa Dash to Panel. Auto Move Windows foi
     descartado (conflitava com gTile). gTile gerencia tiling; Dash to Panel gerencia dock/barra.
+20. **Gradience arquivado (jun/2024):** o projeto GradienceTeam/Gradience foi marcado
+    como read-only pelos mantenedores. O pacote `gradience` ainda existe no AUR e funciona,
+    mas a longo prazo o `apply-theme-user.sh` deve migrar para `dconf set` direto nas
+    chaves `org.gnome.desktop.interface` (ou outro mecanismo). O script atual já lida
+    graciosamente com a ausência do `gradience-cli` (skip silencioso). Não bloqueante hoje.
+21. **adw-gtk3:** pacote do tema GTK3 com look libadwaita. Referenciado em
+    `apply-theme-user.sh` (define como `gtk-theme`). Está em `pkglist.txt` desde Fase 4.
+    Sem ele, o fallback é `Adwaita-dark` (cores genéricas do GNOME, não a paleta PeachOS).
 
 ---
 
