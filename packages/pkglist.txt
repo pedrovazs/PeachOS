@@ -1,0 +1,134 @@
+# PeachOS — pacotes do repositório oficial (pacman)
+#
+# Como usar:
+#   sudo pacman -S --needed $(grep -vE '^\s*(#|$)' packages/pkglist.txt)
+#
+# Mantenha em ordem alfabética DENTRO de cada seção.
+# Pacotes do AUR ficam em packages/aurlist.txt.
+
+# === Base e pacman ===
+base-devel
+git
+gnupg
+man-db
+man-pages
+openssh
+reflector
+stow
+unzip
+zip
+
+# === Áudio (Fase 2, bloco 20) ===
+gst-plugin-pipewire
+libpulse
+pipewire
+pipewire-alsa
+pipewire-jack
+pipewire-pulse
+wireplumber
+
+# === Drivers AMD (Fase 2, bloco 30) ===
+lib32-libva-mesa-driver
+lib32-mesa
+lib32-mesa-vdpau
+lib32-vulkan-radeon
+libva-mesa-driver
+mesa
+mesa-vdpau
+vulkan-radeon
+
+# === Btrfs / snapshots (Fase 2, bloco 40) ===
+grub-btrfs
+inotify-tools
+snap-pac
+snapper
+
+# === GRUB / dual boot (Fase 2, bloco 50) ===
+efibootmgr
+grub
+os-prober
+
+# === Segurança (Fase 2, bloco 60) ===
+aide
+firejail
+firewalld
+
+# === Performance (Fase 2, bloco 70) ===
+zram-generator
+
+# === Rede (Fase 2, bloco 90) ===
+avahi
+bind
+networkmanager
+networkmanager-openvpn
+nmap
+nss-mdns
+traceroute
+
+# === Locale, Bluetooth e fontes (Fase 2, bloco 95) ===
+bluez
+bluez-utils
+noto-fonts
+noto-fonts-cjk
+noto-fonts-emoji
+ttf-dejavu
+ttf-jetbrains-mono-nerd
+ttf-liberation
+
+# === Shell e terminal (Fase 3) ===
+ghostty
+starship
+tmux
+zellij
+zsh
+zsh-autosuggestions
+zsh-completions
+zsh-history-substring-search
+zsh-syntax-highlighting
+
+# === CLI moderna (Fase 3) ===
+bat
+eza
+fd
+fzf
+git-delta
+lazygit
+neovim
+ripgrep
+wl-clipboard
+zoxide
+
+# === Runtimes de desenvolvimento (Fase 3) ===
+# Java vai via sdkman (script de instalação próprio, sem pacote oficial).
+# Node vai via fnm (ver aurlist.txt).
+pyenv
+rustup
+
+# === Containers (Fase 3/4) ===
+docker
+docker-compose
+lazydocker
+
+# === GNOME mínimo (Fase 4) ===
+# Lista provisória. Será revisada quando a Fase 4 for executada.
+gdm
+gnome-control-center
+gnome-keyring
+gnome-shell
+gnome-system-monitor
+gnome-text-editor
+gnome-tweaks
+loupe
+mutter
+nautilus
+xdg-desktop-portal-gnome
+xdg-user-dirs
+
+# === Apps (Fase 4) ===
+evince
+firefox
+yazi
+
+# === Tema (Fase 5) ===
+papirus-icon-theme
+plymouth

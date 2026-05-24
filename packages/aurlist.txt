@@ -1,0 +1,28 @@
+# PeachOS — pacotes do AUR
+#
+# Como usar (após instalar o paru — ver scripts/99-pacman-hooks.sh):
+#   paru -S --needed $(grep -vE '^\s*(#|$)' packages/aurlist.txt)
+#
+# paru NÃO está nesta lista: é compilado do source em scripts/99-pacman-hooks.sh
+# porque é o próprio AUR helper.
+
+# === Runtimes (Fase 3) ===
+fnm-bin
+
+# === IDE (Fase 4) ===
+# Build da Microsoft (com LiveShare, Settings Sync e Pylance).
+# Para a versão open source, basta usar `code` (no pkglist.txt).
+visual-studio-code-bin
+
+# === API / DB tools (Fase 4) ===
+beekeeper-studio-bin
+bruno-bin
+
+# === Theming (Fase 5) ===
+# Catppuccin theme para libadwaita (apps GTK4 modernos).
+gradience
+
+# === GNOME extensions (Fase 4) ===
+# Lista provisória. As 13 extensões definitivas serão revisadas na Fase 4.
+# As entradas abaixo são as estritamente referenciadas em CLAUDE.md:
+gnome-shell-extension-nightthemeswitcher
