@@ -46,7 +46,10 @@ Arch = "󰣇 "
 [username]
 show_always = true
 style_user = "bg:peach fg:cream"
-style_root = "bg:red fg:cream bold"
+# Root usa blossom (rosa) em vez de ANSI "red" para ficar visualmente
+# distinto de style_user — o terminal PeachOS mapeia ANSI red → peach,
+# então "red" aqui ficaria igual ao prompt de usuário comum.
+style_root = "bg:blossom fg:cream bold"
 format = '[ $user ]($style)'
 disabled = false
 
