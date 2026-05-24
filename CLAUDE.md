@@ -197,8 +197,8 @@ Rust (rustup), Python (pyenv), Node (fnm), Java (sdkman). Terminal: zellij, tmux
 fzf, ripgrep, fd, bat, eza, zoxide, neovim. Shell: zsh + starship + plugins.
 **STATUS: em andamento.**
 - Concluídos: `dotfiles/zsh/`, `dotfiles/starship/`, `dotfiles/zellij/`,
-  `dotfiles/tmux/`, `dotfiles/ghostty/`, `dotfiles/lazygit/`.
-- Pendentes: `dotfiles/vscode/`, `packages/pkglist.txt`, `packages/aurlist.txt`,
+  `dotfiles/tmux/`, `dotfiles/ghostty/`, `dotfiles/lazygit/`, `dotfiles/vscode/`.
+- Pendentes: `packages/pkglist.txt`, `packages/aurlist.txt`,
   `install.sh` (instalação de pacotes e runtimes).
 
 ### Fase 4 — GNOME
@@ -268,6 +268,10 @@ só `dotfiles/peachd/` e o service file.
     Incluir em `packages/pkglist.txt` quando esse arquivo for criado.
 15. **wl-clipboard:** dependência de runtime de tmux, zellij e lazygit para copy/paste
     no Wayland. Incluir em `packages/pkglist.txt` (`pacman -S wl-clipboard`).
+16. **Extensões obrigatórias do VS Code** (referenciadas no `settings.json`):
+    `Catppuccin.catppuccin-vsc`, `Catppuccin.catppuccin-vsc-icons`,
+    `esbenp.prettier-vscode`, `charliermarsh.ruff`, `rust-lang.rust-analyzer`.
+    Quando `packages/` for criado, adicionar uma lista `vscode-extensions.txt`.
 
 ---
 
