@@ -26,21 +26,3 @@ gradience
 # Lista provisória. As 13 extensões definitivas serão revisadas na Fase 4.
 # As entradas abaixo são as estritamente referenciadas em CLAUDE.md:
 gnome-shell-extension-nightthemeswitcher
-# PeachOS — pacotes AUR (paru)
-# Organizado por fase. Cada nova fase adiciona seu bloco aqui.
-# Instalação: paru -S --needed $(grep -v '^\s*#' packages/aurlist.txt | grep -v '^\s*$')
-# Pré-requisito: paru instalado (ver install.sh — bootstrap do AUR helper).
-
-# ============================================================
-# Fase 2 — Configuração base
-# ============================================================
-
-# Snapper GUI (opcional) — gerenciamento gráfico de snapshots
-# snapper-gui
-
-# ============================================================
-# Fase 3 — Ambiente de desenvolvimento
-# ============================================================
-
-# Fase 3 não requer pacotes do AUR.
-# rustup, pyenv, fnm, starship estão todos no repositório [extra].
