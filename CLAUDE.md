@@ -216,10 +216,11 @@ Paleta, logo, wallpaper (Python+Cairo), Plymouth, GDM, GRUB tema, sons, VS Code
 **STATUS: em andamento.**
 - Concluídos: `themes/palette.json` (fonte da verdade), `themes/gradience/PeachOS.json`,
   `apply-theme-user.sh` (parte de usuário), `themes/grub/theme.txt`,
-  `apply-theme-system.sh` (cobre só o GRUB por ora, com geração de fontes via
-  grub-mkfont a partir do DejaVu Sans), `system/grub` já vem com `GRUB_THEME` ativo.
-- Pendentes: logo SVG (adiado), wallpaper generator (adiado), tema Plymouth,
-  GDM, sons, expandir `apply-theme-system.sh` (Plymouth + GDM),
+  `themes/plymouth/peachos.{plymouth,script}`,
+  `apply-theme-system.sh` (cobre GRUB + Plymouth; fontes GRUB via grub-mkfont/DejaVu),
+  `system/grub` com `GRUB_THEME` ativo e `splash` no cmdline.
+- Pendentes: logo SVG (adiado), wallpaper generator (adiado),
+  GDM, sons, expandir `apply-theme-system.sh` (GDM),
   `apply-theme.sh` (orquestrador).
 
 ### Fase 6 — Configuração das ferramentas
@@ -328,9 +329,7 @@ só `dotfiles/peachd/` e o service file.
 
 Fases 1, 2, 3 e 4 concluídas. Fase 5 em andamento. Ordem sugerida:
 
-1. Fase 5 — Plymouth: criar `themes/plymouth/` com tema de boot e estender
-   `apply-theme-system.sh` para aplicá-lo.
-2. Fase 5 — GDM: tema de tela de login, também via `apply-theme-system.sh`.
+1. Fase 5 — GDM: tema de tela de login via `apply-theme-system.sh`.
 3. Fase 5 — `apply-theme.sh` (orquestrador que chama user + system).
 4. Fase 7 — `bootstrap.sh` (orquestrador completo: instala + aplica tema).
 5. Fase 7 — `docs/MIGRATION.md` (checklist VM → hardware físico).

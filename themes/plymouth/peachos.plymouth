@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=PeachOS
+Description=PeachOS boot splash — Fase 5
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/peachos
+ScriptFile=/usr/share/plymouth/themes/peachos/peachos.script

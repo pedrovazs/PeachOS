@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 # apply-theme-system.sh — PeachOS
 # Fase 5: aplica tema do sistema (precisa de sudo).
-# Cobertura atual: GRUB. Plymouth e GDM serão adicionados em iterações
-# seguintes da Fase 5.
+# Cobertura atual: GRUB, Plymouth. GDM será adicionado em iteração seguinte.
 #
 # Para a parte de usuário (gsettings, Gradience, extensões) ver
 # apply-theme-user.sh.
@@ -21,6 +20,10 @@ GRUB_CFG="/boot/grub/grub.cfg"
 # universal no Arch (puxada por várias coisas) e cobre acentos PT-BR.
 FONT_REGULAR="/usr/share/fonts/TTF/DejaVuSans.ttf"
 FONT_BOLD="/usr/share/fonts/TTF/DejaVuSans-Bold.ttf"
+
+PLYMOUTH_THEME_SRC="${REPO_DIR}/themes/plymouth"
+PLYMOUTH_THEME_DEST="/usr/share/plymouth/themes/peachos"
+MKINITCPIO_CONF="/etc/mkinitcpio.conf"
 
 log()  { echo "  [theme-system] $*"; }
 fail() { echo "ERRO: $*" >&2; exit 1; }
@@ -101,11 +104,41 @@ apply_grub_theme() {
     regenerate_grub_config
 }
 
+apply_plymouth_theme() {
+    log "=== Plymouth ==="
+
+    if ! command -v plymouth-set-default-theme &>/dev/null; then
+        log "plymouth não instalado — pulando."
+        log "Instale com: pacman -S plymouth"
+        return
+    fi
+
+    # Verifica o hook em mkinitcpio.conf. Sem ele o Plymouth não aparece no boot.
+    # A ordem correta está documentada no ponto #6 do CLAUDE.md.
+    if ! grep -q 'plymouth' "${MKINITCPIO_CONF}" 2>/dev/null; then
+        log "AVISO: hook 'plymouth' não encontrado em ${MKINITCPIO_CONF}."
+        log "  Adicione manualmente: HOOKS=(base udev plymouth autodetect ...)"
+        log "  Consulte o ponto #6 do CLAUDE.md para a ordem exata dos hooks."
+        log "  Tema instalado mesmo assim; rebuild do initrd será feito após"
+        log "  você adicionar o hook."
+    fi
+
+    log "Instalando tema em ${PLYMOUTH_THEME_DEST}"
+    mkdir -p "${PLYMOUTH_THEME_DEST}"
+    install -m 0644 "${PLYMOUTH_THEME_SRC}/peachos.plymouth" "${PLYMOUTH_THEME_DEST}/"
+    install -m 0644 "${PLYMOUTH_THEME_SRC}/peachos.script"   "${PLYMOUTH_THEME_DEST}/"
+
+    log "Definindo PeachOS como tema padrão e reconstruindo initrd"
+    # --rebuild-initrd chama mkinitcpio internamente
+    plymouth-set-default-theme peachos --rebuild-initrd
+}
+
 # ── main ──────────────────────────────────────────────────────────────────────
 check_root
 log "Iniciando apply-theme-system (PeachOS)"
 
 apply_grub_theme
-# TODO Fase 5: apply_plymouth_theme, apply_gdm_theme
+apply_plymouth_theme
+# TODO Fase 5: apply_gdm_theme
 
-log "Tema de sistema aplicado. Reinicie para ver o novo GRUB."
+log "Tema de sistema aplicado. Reinicie para ver o novo GRUB e o Plymouth."
