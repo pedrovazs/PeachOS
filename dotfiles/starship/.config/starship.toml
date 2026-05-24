@@ -117,5 +117,7 @@ format = '[󱎫 $duration]($style) '
 
 [character]
 success_symbol = '[❯](bold fg:peach)'
-error_symbol   = '[❯](bold fg:red)'
+# blossom (rosa) em vez de ANSI "red": no terminal PeachOS, red → peach,
+# o que tornaria success e error indistinguíveis visualmente.
+error_symbol   = '[❯](bold fg:blossom)'
 vimcmd_symbol  = '[❮](bold fg:lavender)'

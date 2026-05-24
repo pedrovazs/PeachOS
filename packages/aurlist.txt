@@ -23,24 +23,16 @@ bruno-bin
 gradience
 
 # === GNOME extensions (Fase 4) ===
-# Lista provisória. As 13 extensões definitivas serão revisadas na Fase 4.
-# As entradas abaixo são as estritamente referenciadas em CLAUDE.md:
+# 13 extensões definitivas. As 2 do repositório oficial (appindicator, user-themes
+# via gnome-shell-extensions) ficam no pkglist.txt.
 gnome-shell-extension-nightthemeswitcher
-# PeachOS — pacotes AUR (paru)
-# Organizado por fase. Cada nova fase adiciona seu bloco aqui.
-# Instalação: paru -S --needed $(grep -v '^\s*#' packages/aurlist.txt | grep -v '^\s*$')
-# Pré-requisito: paru instalado (ver install.sh — bootstrap do AUR helper).
-
-# ============================================================
-# Fase 2 — Configuração base
-# ============================================================
-
-# Snapper GUI (opcional) — gerenciamento gráfico de snapshots
-# snapper-gui
-
-# ============================================================
-# Fase 3 — Ambiente de desenvolvimento
-# ============================================================
-
-# Fase 3 não requer pacotes do AUR.
-# rustup, pyenv, fnm, starship estão todos no repositório [extra].
+gnome-shell-extension-gtile
+gnome-shell-extension-dash-to-panel
+gnome-shell-extension-caffeine
+gnome-shell-extension-clipboard-indicator
+gnome-shell-extension-blur-my-shell
+gnome-shell-extension-just-perfection-desktop
+gnome-shell-extension-gsconnect
+gnome-shell-extension-vitals
+gnome-shell-extension-rounded-window-corners-reborn
+gnome-shell-extension-fly-pie

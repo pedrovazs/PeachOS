@@ -13,16 +13,18 @@ theme "peachos"
 
 themes {
     peachos {
-        // Paleta PeachOS
+        // Paleta PeachOS — espelha mapeamento ANSI do ghostty (consistência entre terminais)
+        // ANSI 2 (green) e 6 (cyan) não têm cor oficial na paleta PeachOS;
+        // usam muted_plum e grub_accent respectivamente. Decisão registrada em CLAUDE.md nota 13.
         fg          "#FFF8F5"   // cream
         bg          "#2D2433"   // deep_plum
         black       "#2D2433"   // deep_plum
-        red         "#E8956D"   // peach (accent para erros)
-        green       "#A8C5A0"   // verde suave (sem cor oficial — derivado)
+        red         "#E8956D"   // peach
+        green       "#6B5B7A"   // muted_plum  (ANSI 2 — sem verde na paleta)
         yellow      "#F4C2B0"   // peach_rose
         blue        "#C4A8D4"   // lavender
         magenta     "#E8A0B8"   // blossom
-        cyan        "#8BBEC8"   // azul suave (derivado)
+        cyan        "#F1B098"   // grub_accent  (ANSI 6 — sem ciano na paleta)
         white       "#FFF8F5"   // cream
         orange      "#E8956D"   // peach
     }

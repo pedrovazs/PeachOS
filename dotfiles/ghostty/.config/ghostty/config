@@ -1,6 +1,7 @@
 # PeachOS — Ghostty config
-# Fonte da verdade da paleta: themes/palette.json (ainda não criado — Fase 5).
-# Por enquanto, cores hardcoded espelham CLAUDE.md.
+# Fonte da verdade da paleta: themes/palette.json
+# As cores hex aqui são geradas a partir do palette.json pelo apply-theme.sh
+# (Fase 5). Por enquanto, mantidas em sincronia manual.
 
 # --- fonte ---
 font-family = JetBrainsMono Nerd Font

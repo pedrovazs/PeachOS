@@ -202,13 +202,22 @@ fzf, ripgrep, fd, bat, eza, zoxide, neovim. Shell: zsh + starship + plugins.
 GNOME mínimo, apps (Ghostty, Nautilus+Yazi, Loupe, Evince, VS Code, Bruno,
 Portainer+Lazydocker, Beekeeper, Lazygit, Firefox), fontes (JetBrains Mono Nerd +
 Noto), Papirus, 13 extensões, theming.
-**STATUS: planejada.** Artefatos: `pkglist.txt`, `aurlist.txt`, `dotfiles/`.
+**STATUS: concluída (artefatos).** Artefatos:
+- `packages/pkglist.txt` — seção GNOME finalizada (núcleo + gvfs + polkit-gnome + extensões oficiais).
+- `packages/aurlist.txt` — 11 extensões AUR + Night Theme Switcher (13 total com as 2 do repo oficial).
+- `themes/gradience/PeachOS.json` — preset libadwaita completo com a paleta PeachOS.
+- `apply-theme-user.sh` — aplica dark mode, ícones, fontes, Gradience, ativa 13 extensões e configura Night Theme Switcher.
+- Logo e wallpaper: adiados conscientemente. Usando só o nome "PeachOS" por ora.
+- Pendente (em produção): dotfiles específicos de extensões (Dash to Panel, gTile layouts) — criados após a instalação real.
 
 ### Fase 5 — Identidade visual
 Paleta, logo, wallpaper (Python+Cairo), Plymouth, GDM, GRUB tema, sons, VS Code
 (Catppuccin), Ghostty.
-**STATUS: paleta definida em CLAUDE.md (fonte definitiva até `themes/palette.json` ser criado).
-Logo planejada.** Artefatos: tudo em `themes/`, `sounds/`, `apply-theme*.sh` — a criar.
+**STATUS: em andamento.**
+- Concluídos: `themes/palette.json` (fonte da verdade), `themes/gradience/PeachOS.json`,
+  `apply-theme-user.sh` (parte de usuário).
+- Pendentes: logo SVG (adiado), wallpaper generator (adiado), tema GRUB, tema Plymouth,
+  GDM, sons, `apply-theme-system.sh`, `apply-theme.sh` (orquestrador).
 
 ### Fase 6 — Configuração das ferramentas
 Bruno, Lazygit, Beekeeper, Portainer, Zellij, tmux, Starship — cada um com config
@@ -269,6 +278,23 @@ só `dotfiles/peachd/` e o service file.
     `Catppuccin.catppuccin-vsc`, `Catppuccin.catppuccin-vsc-icons`,
     `esbenp.prettier-vscode`, `charliermarsh.ruff`, `rust-lang.rust-analyzer`.
     Quando `packages/` for criado, adicionar uma lista `vscode-extensions.txt`.
+17. **Gradience preset — cores derivadas:** o arquivo `themes/gradience/PeachOS.json`
+    usa 3 valores hex derivados (não no `palette.json`): `#231C2D` (headerbar/view bg,
+    10% mais escuro que deep_plum), `#271E31` (sidebar bg) e `#3A2F48` (card/dialog/popover
+    bg, entre deep_plum e muted_plum). Decisão consciente para criar profundidade visual.
+18. **GSConnect e firewalld:** a extensão GSConnect precisa de portas abertas para
+    comunicar com o Android. Rodar `firewall-cmd --zone=public --add-service=gsconnect`
+    ou o app configura automaticamente via D-Bus.
+19. **Dash to Panel vs Dash to Dock:** projeto usa Dash to Panel. Auto Move Windows foi
+    descartado (conflitava com gTile). gTile gerencia tiling; Dash to Panel gerencia dock/barra.
+20. **Gradience arquivado (jun/2024):** o projeto GradienceTeam/Gradience foi marcado
+    como read-only pelos mantenedores. O pacote `gradience` ainda existe no AUR e funciona,
+    mas a longo prazo o `apply-theme-user.sh` deve migrar para `dconf set` direto nas
+    chaves `org.gnome.desktop.interface` (ou outro mecanismo). O script atual já lida
+    graciosamente com a ausência do `gradience-cli` (skip silencioso). Não bloqueante hoje.
+21. **adw-gtk3:** pacote do tema GTK3 com look libadwaita. Referenciado em
+    `apply-theme-user.sh` (define como `gtk-theme`). Está em `pkglist.txt` desde Fase 4.
+    Sem ele, o fallback é `Adwaita-dark` (cores genéricas do GNOME, não a paleta PeachOS).
 
 ---
 
@@ -297,13 +323,14 @@ só `dotfiles/peachd/` e o service file.
 
 ## Próximas tarefas (estado atual: maio 2026)
 
-Fases 1, 2 e 3 concluídas. Próxima ordem sugerida:
+Fases 1, 2, 3 e 4 concluídas. Fase 5 em andamento. Ordem sugerida:
 
-1. Criar `themes/palette.json` (Fase 5 — desbloqueia `apply-theme.sh`).
-2. Avançar Fase 4: revisar lista provisória de GNOME no `pkglist.txt`, definir
-   as 13 extensões finais, theming via gradience.
-3. Escrever `apply-theme.sh`, `apply-theme-user.sh`, `apply-theme-system.sh` (Fase 5).
-4. Escrever `bootstrap.sh` (Fase 7).
-5. Escrever `docs/MIGRATION.md` (Fase 7).
+1. Fase 5 — sistema: `apply-theme-system.sh` (GRUB tema, Plymouth, GDM) + `apply-theme.sh` (orquestrador).
+2. Fase 5 — GRUB: criar `themes/grub/theme.txt` com identidade PeachOS (sem logo por ora).
+3. Fase 5 — Plymouth: criar `themes/plymouth/` com tema de boot.
+4. Fase 7 — `bootstrap.sh` (orquestrador completo: instala + aplica tema).
+5. Fase 7 — `docs/MIGRATION.md` (checklist VM → hardware físico).
+6. Pós-instalação na VM: criar dotfiles de extensões (Dash to Panel preset, gTile layouts)
+   após ter o GNOME rodando e poder exportar as configurações reais.
 
 Consulte o `docs/PeachOS-Plano-Completo.docx` para o detalhamento de cada item.
