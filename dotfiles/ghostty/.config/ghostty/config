@@ -1,0 +1,74 @@
+# PeachOS — Ghostty config
+# Fonte da verdade da paleta: themes/palette.json (ainda não criado — Fase 5).
+# Por enquanto, cores hardcoded espelham CLAUDE.md.
+
+# --- fonte ---
+font-family = JetBrainsMono Nerd Font
+font-size = 12
+
+# --- janela ---
+window-padding-x = 12
+window-padding-y = 10
+window-padding-balance = true
+window-decoration = true
+window-theme = dark
+gtk-titlebar = false
+gtk-tabs-location = top
+gtk-wide-tabs = false
+
+# --- comportamento ---
+shell-integration = zsh
+shell-integration-features = cursor,sudo,title
+copy-on-select = false
+mouse-hide-while-typing = true
+confirm-close-surface = false
+scrollback-limit = 10000000
+clipboard-read = allow
+clipboard-write = allow
+clipboard-trim-trailing-spaces = true
+
+# --- cursor ---
+cursor-style = block
+cursor-style-blink = false
+cursor-color = F4C2B0
+cursor-text = 2D2433
+
+# --- cores base (PeachOS dark) ---
+background = 2D2433
+foreground = FFF8F5
+selection-background = 6B5B7A
+selection-foreground = FFF8F5
+
+# --- paleta ANSI 0-15 ---
+# Mapeada para a paleta oficial. ANSI 2 (green) e 6 (cyan) não têm
+# equivalente direto na paleta PeachOS; são substituídos por
+# muted_plum e grub_accent. Decisão consciente, registrada aqui.
+palette =  0=#2D2433
+palette =  1=#E8956D
+palette =  2=#6B5B7A
+palette =  3=#F4C2B0
+palette =  4=#C4A8D4
+palette =  5=#E8A0B8
+palette =  6=#F1B098
+palette =  7=#FFF8F5
+palette =  8=#6B5B7A
+palette =  9=#E8956D
+palette = 10=#6B5B7A
+palette = 11=#F4C2B0
+palette = 12=#C4A8D4
+palette = 13=#E8A0B8
+palette = 14=#F1B098
+palette = 15=#FDEEE8
+
+# --- atalhos ---
+keybind = ctrl+shift+t=new_tab
+keybind = ctrl+shift+w=close_surface
+keybind = ctrl+shift+enter=new_split:right
+keybind = ctrl+shift+down=new_split:down
+keybind = ctrl+shift+left=goto_split:previous
+keybind = ctrl+shift+right=goto_split:next
+keybind = ctrl+shift+c=copy_to_clipboard
+keybind = ctrl+shift+v=paste_from_clipboard
+keybind = ctrl+shift+equal=increase_font_size:1
+keybind = ctrl+shift+minus=decrease_font_size:1
+keybind = ctrl+shift+0=reset_font_size
