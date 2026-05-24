@@ -1,0 +1,75 @@
+# PeachOS — GRUB theme
+# Cores derivadas de themes/palette.json. Alterar a paleta e rodar
+# apply-theme-system.sh para reaplicar (não há geração automática — as cores
+# abaixo são mantidas em sincronia manualmente, como nos demais dotfiles).
+#
+# Sem logo por ora (Fase 5 em andamento). Identidade vem do nome e da paleta.
+
+# === Globais ===
+title-text: ""
+desktop-color: "#2D2433"
+message-color: "#FFF8F5"
+message-bg-color: "#2D2433"
+
+# === Cabeçalho ===
++ label {
+    top = 10%
+    left = 0
+    width = 100%
+    align = "center"
+    text = "PeachOS"
+    color = "#F1B098"
+    font = "DejaVu Sans Bold 24"
+}
+
++ label {
+    top = 17%
+    left = 0
+    width = 100%
+    align = "center"
+    text = "Selecione o sistema para iniciar"
+    color = "#C4A8D4"
+    font = "DejaVu Sans Regular 14"
+}
+
+# === Menu de boot ===
++ boot_menu {
+    left = 25%
+    width = 50%
+    top = 28%
+    height = 45%
+    item_font = "DejaVu Sans Regular 16"
+    item_color = "#FFF8F5"
+    selected_item_color = "#F1B098"
+    item_height = 36
+    item_padding = 8
+    item_spacing = 4
+    scrollbar = false
+}
+
+# === Countdown ===
++ progress_bar {
+    id = "__timeout__"
+    left = 25%
+    top = 80%
+    width = 50%
+    height = 18
+    show_text = true
+    font = "DejaVu Sans Regular 12"
+    text_color = "#FFF8F5"
+    text = "@TIMEOUT_NOTIFICATION_LONG@"
+    fg_color = "#E8956D"
+    bg_color = "#6B5B7A"
+    border_color = "#F1B098"
+}
+
+# === Rodapé ===
++ label {
+    bottom = 4%
+    left = 0
+    width = 100%
+    align = "center"
+    text = "Enter: iniciar    e: editar    c: console"
+    color = "#6B5B7A"
+    font = "DejaVu Sans Regular 11"
+}

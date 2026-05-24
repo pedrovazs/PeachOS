@@ -3,14 +3,16 @@
 GRUB_DEFAULT=0
 GRUB_TIMEOUT=5
 GRUB_DISTRIBUTOR="PeachOS"
-GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=3 systemd.show_status=auto rd.udev.log_level=3"
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash loglevel=3 systemd.show_status=auto rd.udev.log_level=3"
 GRUB_CMDLINE_LINUX=""
 
 # Habilitar os-prober para detectar Windows no dual boot (ponto de atenção #3)
 GRUB_DISABLE_OS_PROBER=false
 
-# Tema aplicado pelo apply-theme-system.sh
-# GRUB_THEME="/boot/grub/themes/peachos/theme.txt"
+# Tema PeachOS — arquivos instalados por apply-theme-system.sh.
+# Se o tema ainda não foi aplicado, o grub-mkconfig emite um warning e cai
+# para o tema padrão; basta rodar apply-theme-system.sh para resolver.
+GRUB_THEME="/boot/grub/themes/peachos/theme.txt"
 
 # Resolução
 GRUB_GFXMODE=auto
