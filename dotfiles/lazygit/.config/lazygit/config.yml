@@ -1,0 +1,157 @@
+# PeachOS — lazygit config
+# Paleta PeachOS dark (espelha CLAUDE.md até themes/palette.json existir — Fase 5):
+#   cream       #FFF8F5   foreground principal
+#   deep_plum   #2D2433   background
+#   muted_plum  #6B5B7A   elementos secundários
+#   peach       #E8956D   accent / seleção
+#   peach_rose  #F4C2B0   cursores
+#   lavender    #C4A8D4   branches / info
+#   blossom     #E8A0B8   remotes / secundário
+
+gui:
+  # Janela
+  scrollHeight: 5
+  scrollPastBottom: true
+  sidePanelWidth: 0.3333
+  expandFocusedSidePanel: false
+  mainPanelSplitMode: flexible
+  enlargedSideViewLocation: left
+  timeFormat: "02 Jan 15:04"
+  shortTimeFormat: "15:04"
+  border: rounded
+  animateExplosion: false
+  portraitMode: auto
+  filterMode: substring
+  spinner:
+    frames: ["⣾","⣽","⣻","⢿","⡿","⣟","⣯","⣷"]
+    rate: 100
+  showFileTree: true
+  showRandomTip: false
+  showCommandLog: false
+  showBottomLine: true
+  showPanelJumps: true
+  nerdFontsVersion: "3"
+
+  # Tema PeachOS dark
+  theme:
+    activeBorderColor:
+      - "#E8956D"   # peach
+      - bold
+    inactiveBorderColor:
+      - "#6B5B7A"   # muted_plum
+    searchingActiveBorderColor:
+      - "#F4C2B0"   # peach_rose
+      - bold
+    optionsTextColor:
+      - "#C4A8D4"   # lavender
+    selectedLineBgColor:
+      - "#6B5B7A"   # muted_plum
+    cherryPickedCommitBgColor:
+      - "#6B5B7A"   # muted_plum
+    cherryPickedCommitFgColor:
+      - "#E8956D"   # peach
+    unstagedChangesColor:
+      - "#E8956D"   # peach (destaque de erro/mudança)
+    defaultFgColor:
+      - "#FFF8F5"   # cream
+    authorColors:
+      default: "#E8A0B8"   # blossom
+
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --line-numbers
+  commit:
+    signOff: false
+    autoWrapCommitMessage: true
+    autoWrapWidth: 72
+  merging:
+    manualCommit: false
+    args: ""
+  log:
+    order: topo-order
+    showGraph: whenMaximised
+    showWholeGraph: false
+  skipHookPrefix: WIP
+  autoFetch: true
+  autoRefresh: true
+  fetchAll: true
+  branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --"
+  allBranchesLogCmd: "git log --graph --all --color=always --abbrev-commit --decorate --date=relative --pretty=medium"
+  overrideGpg: false
+  disableForcePushing: false
+  parseEmoji: true
+  diffContextSize: 5
+
+os:
+  editPreset: "nvim"
+  editInTerminal: true
+  openDirInEditor: "code {{dir}}"
+  copyToClipboardCmd: "wl-copy"
+  readFromClipboardCmd: "wl-paste"
+
+refresher:
+  refreshInterval: 10
+  fetchInterval: 60
+
+update:
+  method: never
+
+# Keybinds personalizados
+keybinding:
+  universal:
+    quit: "q"
+    quitWithoutChangingDirectory: "Q"
+    return: "<esc>"
+    nextTab: "]"
+    prevTab: "["
+    nextScreenMode: "+"
+    prevScreenMode: "_"
+    undo: "z"
+    redo: "<c-z>"
+    filteringMenu: "<c-s>"
+    scrollUpMain: "<pgup>"
+    scrollDownMain: "<pgdn>"
+    openRecentRepos: "<c-r>"
+    createRebaseOptionsMenu: "m"
+  branches:
+    createPullRequest: "o"
+    viewPullRequestOptions: "O"
+    copyPullRequestURL: "<c-y>"
+    checkoutBranchByName: "c"
+    forceCheckoutBranch: "F"
+    rebaseBranch: "r"
+    mergeIntoCurrentBranch: "M"
+    fastForwardToRemote: "f"
+    pushTag: "P"
+    setUpstream: "u"
+    fetchRemote: "f"
+  commits:
+    squashDown: "s"
+    renameCommit: "r"
+    renameCommitWithEditor: "R"
+    viewResetOptions: "g"
+    markAsBaseCommit: "B"
+    amendToCommit: "A"
+    pickCommit: "p"
+    revertCommit: "t"
+    cherryPickCopy: "c"
+    pasteCommits: "v"
+    createFixupCommit: "f"
+  files:
+    commitChanges: "c"
+    commitChangesWithoutHook: "w"
+    amendLastCommit: "A"
+    commitChangesWithEditor: "C"
+    findBaseCommitForFixup: "f"
+    ignoreFile: "i"
+    refreshFiles: "r"
+    stashAllChanges: "s"
+    viewStashOptions: "S"
+    toggleStagedAll: "<a-a>"
+    viewResetOptions: "D"
+    fetch: "f"
+    toggleTreeView: "`"
+    openMergeTool: "M"
+    openStatusFilter: "<c-b>"
+    copyFileInfoToClipboard: "y"

@@ -31,11 +31,11 @@ O desenvolvimento está dividido em 8 fases. O detalhamento completo está em
 
 | Fase | Escopo | Status |
 |------|--------|--------|
-| 1 | Preparar a máquina virtual | Planejada |
-| 2 | Instalação e configuração base do Arch | Planejada |
-| 3 | Ambiente de desenvolvimento | Planejada |
+| 1 | Preparar a máquina virtual | ✅ Concluída |
+| 2 | Instalação e configuração base do Arch | ✅ Concluída |
+| 3 | Ambiente de desenvolvimento | 🔄 Em andamento |
 | 4 | Instalação e configuração do GNOME | Planejada |
-| 5 | Identidade visual | Paleta e logo definidas |
+| 5 | Identidade visual | Paleta definida |
 | 6 | Configuração das ferramentas | Planejada |
 | 7 | Estabilização e documentação | Planejada |
 | 8 | Camada de IA | Planejada |
@@ -77,20 +77,28 @@ peachos-config/
 
 ## Como usar
 
-> ⚠️ O projeto ainda está em desenvolvimento. As instruções abaixo refletem o
-> fluxo planejado.
+> ⚠️ O projeto está na Fase 3. O `bootstrap.sh` e o `install.sh` ainda não existem —
+> estão previstos para a Fase 7. No momento, os scripts de bloco da Fase 2 são
+> executados individualmente a partir de `scripts/`.
 
-A instalação base do Arch é feita manualmente via `archinstall`. Depois, a
-configuração do PeachOS é aplicada a partir deste repositório:
+A instalação base do Arch é feita manualmente via `archinstall`. Depois, os scripts
+de configuração são executados por bloco:
 
 ```bash
 git clone https://github.com/pedrovazs/PeachOS
 cd PeachOS
-chmod +x bootstrap.sh
-./bootstrap.sh
+# Fase 2: executar cada script em ordem, como root
+sudo bash scripts/10-mirrors-pacman.sh
+sudo bash scripts/20-audio.sh
+# ... e assim por diante
 ```
 
-O `bootstrap.sh` instala os pacotes e aplica a identidade visual completa.
+Os dotfiles são aplicados via `stow`:
+
+```bash
+# Exemplo: aplicar config do ghostty
+stow -d dotfiles -t ~ ghostty
+```
 
 ## Licença
 

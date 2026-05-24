@@ -184,18 +184,22 @@ do estado de cada uma. Atualize o STATUS conforme avançar.
 
 ### Fase 1 — Preparar a VM
 VirtualBox/QEMU, 8GB RAM, 60GB disco, UEFI, VT-x/AMD-V.
-**STATUS: planejada.** Não gera artefato no repositório.
+**STATUS: concluída.** Artefato: `docs/fase1-checklist.md`.
 
 ### Fase 2 — Instalação e configuração base
 12 blocos. Instalação base via `archinstall` (manual), depois scripts de bloco em
 `scripts/`. Cobre: mirrors, áudio (PipeWire), drivers AMD, Btrfs+snapshots+grub-btrfs,
 GRUB dual boot, segurança, performance, logs, rede, locale/bluetooth/fontes, pacman hooks.
-**STATUS: planejada.** Artefatos: `scripts/*.sh`, `system/*`, `security/*`.
+**STATUS: concluída.** Artefatos: `scripts/*.sh` (11 blocos), `system/*`, `security/*`.
 
 ### Fase 3 — Ambiente de desenvolvimento
 Rust (rustup), Python (pyenv), Node (fnm), Java (sdkman). Terminal: zellij, tmux,
 fzf, ripgrep, fd, bat, eza, zoxide, neovim. Shell: zsh + starship + plugins.
-**STATUS: planejada.** Artefatos: `dotfiles/zsh/`, `dotfiles/starship/`, parte do `install.sh`.
+**STATUS: em andamento.**
+- Concluídos: `dotfiles/zsh/`, `dotfiles/starship/`, `dotfiles/zellij/`,
+  `dotfiles/tmux/`, `dotfiles/ghostty/`, `dotfiles/lazygit/`.
+- Pendentes: `dotfiles/vscode/`, `packages/pkglist.txt`, `packages/aurlist.txt`,
+  `install.sh` (instalação de pacotes e runtimes).
 
 ### Fase 4 — GNOME
 GNOME mínimo, apps (Ghostty, Nautilus+Yazi, Loupe, Evince, VS Code, Bruno,
@@ -206,18 +210,19 @@ Noto), Papirus, 13 extensões, theming.
 ### Fase 5 — Identidade visual
 Paleta, logo, wallpaper (Python+Cairo), Plymouth, GDM, GRUB tema, sons, VS Code
 (Catppuccin), Ghostty.
-**STATUS: paleta e logo definidas.** Artefatos: tudo em `themes/`, `sounds/`,
-`apply-theme*.sh`.
+**STATUS: paleta definida em CLAUDE.md (fonte definitiva até `themes/palette.json` ser criado).
+Logo planejada.** Artefatos: tudo em `themes/`, `sounds/`, `apply-theme*.sh` — a criar.
 
 ### Fase 6 — Configuração das ferramentas
 Bruno, Lazygit, Beekeeper, Portainer, Zellij, tmux, Starship — cada um com config
 e tema próprios.
-**STATUS: planejada.** Artefatos: `dotfiles/`.
+**STATUS: parcialmente coberta pela Fase 3** (lazygit, zellij, tmux, starship já têm dotfiles).
+Pendentes: Bruno, Beekeeper, configurações específicas de Portainer.
 
 ### Fase 7 — Estabilização e documentação
 README, MIGRATION.md, snapshots estratégicos, checklist de migração, scripts
 `install.sh`/`apply-theme.sh`/`bootstrap.sh` finalizados.
-**STATUS: planejada.** Artefatos: `README.md`, `docs/MIGRATION.md`, scripts raiz.
+**STATUS: planejada.** Artefatos: `README.md` (existe, parcial), `docs/MIGRATION.md`, scripts raiz.
 
 ### Fase 8 — Camada de IA
 Daemon `peachd` (Python, systemd de usuário, socket Unix, API Anthropic), clientes
@@ -255,6 +260,14 @@ só `dotfiles/peachd/` e o service file.
     o virtualenv do `peachd` com `pip-audit` separadamente.
 12. **peachd como serviço de usuário:** só roda dentro da sessão gráfica, não em
     TTY puro antes do login. Decisão consciente.
+13. **Cores ANSI 2 (green) e 6 (cyan):** a paleta PeachOS não tem verde nem ciano.
+    Em zellij e ghostty, essas posições ANSI são mapeadas para `muted_plum (#6B5B7A)`
+    e `grub_accent (#F1B098)` respectivamente. Decisão consciente — fica documentado
+    no próprio arquivo de config de cada ferramenta.
+14. **delta como pager do lazygit:** requer `delta` instalado (`pacman -S git-delta`).
+    Incluir em `packages/pkglist.txt` quando esse arquivo for criado.
+15. **wl-clipboard:** dependência de runtime de tmux, zellij e lazygit para copy/paste
+    no Wayland. Incluir em `packages/pkglist.txt` (`pacman -S wl-clipboard`).
 
 ---
 
@@ -281,14 +294,15 @@ só `dotfiles/peachd/` e o service file.
 - Commits em português, descritivos.
 - Ao concluir trabalho de uma fase, atualizar o STATUS dela neste arquivo.
 
-## Primeiras tarefas sugeridas
+## Próximas tarefas (estado atual: maio 2026)
 
-Se estiver começando do zero, uma ordem que funciona:
-1. Criar `packages/pkglist.txt` e `packages/aurlist.txt` a partir do plano.
-2. Criar `themes/palette.json`.
-3. Escrever os scripts de bloco da Fase 2 em `scripts/`.
-4. Escrever os dotfiles da Fase 3 e 4.
-5. Escrever `install.sh`, `apply-theme*.sh` e `bootstrap.sh`.
-6. Escrever `README.md` e `docs/MIGRATION.md`.
+Fases 1 e 2 concluídas. Fase 3 em andamento. Ordem sugerida para continuar:
+
+1. Finalizar Fase 3: `dotfiles/vscode/settings.json`, `packages/pkglist.txt`,
+   `packages/aurlist.txt`, `install.sh`.
+2. Criar `themes/palette.json` (Fase 5 — desbloqueia `apply-theme.sh`).
+3. Avançar Fase 4: pacotes GNOME, extensões, theming.
+4. Escrever `bootstrap.sh`, `install.sh`, `apply-theme*.sh` (Fase 7).
+5. Escrever `docs/MIGRATION.md` (Fase 7).
 
 Consulte o `docs/PeachOS-Plano-Completo.docx` para o detalhamento de cada item.
