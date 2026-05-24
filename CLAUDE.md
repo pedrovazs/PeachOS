@@ -195,12 +195,8 @@ GRUB dual boot, segurança, performance, logs, rede, locale/bluetooth/fontes, pa
 ### Fase 3 — Ambiente de desenvolvimento
 Rust (rustup), Python (pyenv), Node (fnm), Java (sdkman). Terminal: zellij, tmux,
 fzf, ripgrep, fd, bat, eza, zoxide, neovim. Shell: zsh + starship + plugins.
-**STATUS: em andamento.**
-- Concluídos: `dotfiles/zsh/`, `dotfiles/starship/`, `dotfiles/zellij/`,
-  `dotfiles/tmux/`, `dotfiles/ghostty/`, `dotfiles/lazygit/`, `dotfiles/vscode/`,
-  `packages/pkglist.txt`, `packages/aurlist.txt`.
-- Pendente: `install.sh` (orquestrador que consome essas listas, instala runtimes
-  via rustup/pyenv/fnm/sdkman e aplica dotfiles com stow).
+**STATUS: concluída.** Artefatos: `dotfiles/{zsh,starship,zellij,tmux,ghostty,lazygit,vscode}/`,
+`packages/{pkglist,aurlist}.txt`, `install.sh`.
 
 ### Fase 4 — GNOME
 GNOME mínimo, apps (Ghostty, Nautilus+Yazi, Loupe, Evince, VS Code, Bruno,
@@ -301,15 +297,13 @@ só `dotfiles/peachd/` e o service file.
 
 ## Próximas tarefas (estado atual: maio 2026)
 
-Fases 1 e 2 concluídas. Fase 3 quase completa (falta `install.sh`). Ordem sugerida:
+Fases 1, 2 e 3 concluídas. Próxima ordem sugerida:
 
-1. Finalizar Fase 3: `install.sh` consumindo `packages/pkglist.txt` e
-   `packages/aurlist.txt`, instalando runtimes (rustup/pyenv/fnm/sdkman) e
-   aplicando dotfiles via stow.
-2. Criar `themes/palette.json` (Fase 5 — desbloqueia `apply-theme.sh`).
-3. Avançar Fase 4: revisar lista provisória de GNOME no `pkglist.txt`, definir
+1. Criar `themes/palette.json` (Fase 5 — desbloqueia `apply-theme.sh`).
+2. Avançar Fase 4: revisar lista provisória de GNOME no `pkglist.txt`, definir
    as 13 extensões finais, theming via gradience.
-4. Escrever `bootstrap.sh` e `apply-theme*.sh` (Fase 7).
+3. Escrever `apply-theme.sh`, `apply-theme-user.sh`, `apply-theme-system.sh` (Fase 5).
+4. Escrever `bootstrap.sh` (Fase 7).
 5. Escrever `docs/MIGRATION.md` (Fase 7).
 
 Consulte o `docs/PeachOS-Plano-Completo.docx` para o detalhamento de cada item.

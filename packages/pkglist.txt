@@ -8,6 +8,7 @@
 
 # === Base e pacman ===
 base-devel
+curl
 git
 gnupg
 man-db
@@ -16,6 +17,7 @@ openssh
 reflector
 stow
 unzip
+wget
 zip
 
 # === Áudio (Fase 2, bloco 20) ===

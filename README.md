@@ -33,7 +33,7 @@ O desenvolvimento está dividido em 8 fases. O detalhamento completo está em
 |------|--------|--------|
 | 1 | Preparar a máquina virtual | ✅ Concluída |
 | 2 | Instalação e configuração base do Arch | ✅ Concluída |
-| 3 | Ambiente de desenvolvimento | 🔄 Em andamento |
+| 3 | Ambiente de desenvolvimento | ✅ Concluída |
 | 4 | Instalação e configuração do GNOME | Planejada |
 | 5 | Identidade visual | Paleta definida |
 | 6 | Configuração das ferramentas | Planejada |
@@ -77,28 +77,26 @@ peachos-config/
 
 ## Como usar
 
-> ⚠️ O projeto está na Fase 3. O `bootstrap.sh` e o `install.sh` ainda não existem —
-> estão previstos para a Fase 7. No momento, os scripts de bloco da Fase 2 são
-> executados individualmente a partir de `scripts/`.
+> ⚠️ O `bootstrap.sh` (orquestrador final) ainda não existe — está previsto para
+> a Fase 7. Por enquanto, os scripts de bloco da Fase 2 e o `install.sh` da
+> Fase 3 são executados em sequência.
 
-A instalação base do Arch é feita manualmente via `archinstall`. Depois, os scripts
-de configuração são executados por bloco:
+A instalação base do Arch é feita manualmente via `archinstall`. Depois:
 
 ```bash
 git clone https://github.com/pedrovazs/PeachOS
 cd PeachOS
-# Fase 2: executar cada script em ordem, como root
+
+# Fase 2: executar cada bloco em ordem, como root, verificando entre eles
 sudo bash scripts/10-mirrors-pacman.sh
 sudo bash scripts/20-audio.sh
-# ... e assim por diante
+# ... e assim por diante até scripts/99-pacman-hooks.sh
+
+# Fase 3: instalar pacotes, runtimes e aplicar dotfiles
+./install.sh    # roda como usuário comum; chama sudo quando precisa
 ```
 
-Os dotfiles são aplicados via `stow`:
-
-```bash
-# Exemplo: aplicar config do ghostty
-stow -d dotfiles -t ~ ghostty
-```
+O `install.sh` é idempotente — pode rodar mais de uma vez sem quebrar.
 
 ## Licença
 
