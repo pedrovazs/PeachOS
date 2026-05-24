@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "name": "PeachOS",
+  "version": "1.0.0",
+  "description": "Paleta oficial do PeachOS. Fonte da verdade para todos os dotfiles, temas (GRUB, Plymouth, GDM) e gerador de wallpaper.",
+
+  "colors": {
+    "cream":       "#FFF8F5",
+    "peach_mist":  "#FDEEE8",
+    "peach":       "#E8956D",
+    "peach_rose":  "#F4C2B0",
+    "grub_accent": "#F1B098",
+    "lavender":    "#C4A8D4",
+    "blossom":     "#E8A0B8",
+    "deep_plum":   "#2D2433",
+    "muted_plum":  "#6B5B7A"
+  },
+
+  "usage": {
+    "cream":       "Background primário (modo claro) e foreground (modo escuro)",
+    "peach_mist":  "Superfícies, cards e bright white",
+    "peach":       "Accent primário; semântico de sucesso; ANSI red",
+    "peach_rose":  "Cursor do terminal; ANSI yellow; semântico de warning",
+    "grub_accent": "Destaque do bootloader; ANSI cyan (sem ciano natural na paleta)",
+    "lavender":    "Accent secundário; ANSI blue; semântico de info",
+    "blossom":     "Accent terciário; ANSI magenta; semântico de erro",
+    "deep_plum":   "Texto primário (modo claro) e background (modo escuro)",
+    "muted_plum":  "Texto secundário; ANSI green (sem verde natural na paleta) e bright black"
+  },
+
+  "ansi": [
+    "deep_plum",
+    "peach",
+    "muted_plum",
+    "peach_rose",
+    "lavender",
+    "blossom",
+    "grub_accent",
+    "cream",
+    "muted_plum",
+    "peach",
+    "muted_plum",
+    "peach_rose",
+    "lavender",
+    "blossom",
+    "grub_accent",
+    "peach_mist"
+  ],
+
+  "semantic": {
+    "success": "peach",
+    "error":   "blossom",
+    "warning": "peach_rose",
+    "info":    "lavender"
+  },
+
+  "terminal": {
+    "background":           "deep_plum",
+    "foreground":           "cream",
+    "cursor":               "peach_rose",
+    "cursor_text":          "deep_plum",
+    "selection_background": "muted_plum",
+    "selection_foreground": "cream"
+  },
+
+  "notes": {
+    "ansi_2_and_6": "A paleta PeachOS não tem verde nem ciano. ANSI 2 (green) é mapeado para muted_plum e ANSI 6 (cyan) para grub_accent. Decisão consciente, espelhada em ghostty, zellij e qualquer outro terminal.",
+    "ansi_bright": "Variantes bright (8-15) reusam as mesmas cores das normais (0-7) — exceto bright black (8) que é muted_plum e bright white (15) que é peach_mist para criar contraste sutil.",
+    "light_mode":  "Variante light ainda não definida. Quando for, o swap será cream ↔ deep_plum como bg/fg e ajustes nos accents."
+  }
+}

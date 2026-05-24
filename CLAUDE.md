@@ -207,8 +207,11 @@ Noto), Papirus, 13 extensões, theming.
 ### Fase 5 — Identidade visual
 Paleta, logo, wallpaper (Python+Cairo), Plymouth, GDM, GRUB tema, sons, VS Code
 (Catppuccin), Ghostty.
-**STATUS: paleta definida em CLAUDE.md (fonte definitiva até `themes/palette.json` ser criado).
-Logo planejada.** Artefatos: tudo em `themes/`, `sounds/`, `apply-theme*.sh` — a criar.
+**STATUS: em andamento.**
+- Concluídos: `themes/palette.json` (fonte da verdade da paleta, mapeamento ANSI
+  e cores semânticas).
+- Pendentes: logo SVG, wallpaper generator, tema GRUB, tema Plymouth, GDM,
+  sons, `apply-theme.sh` e sub-scripts.
 
 ### Fase 6 — Configuração das ferramentas
 Bruno, Lazygit, Beekeeper, Portainer, Zellij, tmux, Starship — cada um com config
@@ -297,12 +300,12 @@ só `dotfiles/peachd/` e o service file.
 
 ## Próximas tarefas (estado atual: maio 2026)
 
-Fases 1, 2 e 3 concluídas. Próxima ordem sugerida:
+Fases 1, 2 e 3 concluídas. Fase 5 iniciada (palette.json criado). Ordem sugerida:
 
-1. Criar `themes/palette.json` (Fase 5 — desbloqueia `apply-theme.sh`).
-2. Avançar Fase 4: revisar lista provisória de GNOME no `pkglist.txt`, definir
+1. Avançar Fase 4: revisar lista provisória de GNOME no `pkglist.txt`, definir
    as 13 extensões finais, theming via gradience.
-3. Escrever `apply-theme.sh`, `apply-theme-user.sh`, `apply-theme-system.sh` (Fase 5).
+2. Escrever `apply-theme.sh`, `apply-theme-user.sh`, `apply-theme-system.sh` (Fase 5).
+3. Logo, wallpaper generator, GRUB theme, Plymouth (Fase 5).
 4. Escrever `bootstrap.sh` (Fase 7).
 5. Escrever `docs/MIGRATION.md` (Fase 7).
 

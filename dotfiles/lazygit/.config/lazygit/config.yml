@@ -1,5 +1,6 @@
 # PeachOS — lazygit config
-# Paleta PeachOS dark (espelha CLAUDE.md até themes/palette.json existir — Fase 5):
+# Fonte da verdade da paleta: themes/palette.json
+# Cores hex aqui serão geradas a partir do palette.json pelo apply-theme.sh (Fase 5):
 #   cream       #FFF8F5   foreground principal
 #   deep_plum   #2D2433   background
 #   muted_plum  #6B5B7A   elementos secundários
