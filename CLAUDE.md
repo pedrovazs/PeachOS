@@ -217,11 +217,11 @@ Paleta, logo, wallpaper (Python+Cairo), Plymouth, GDM, GRUB tema, sons, VS Code
 - Concluídos: `themes/palette.json` (fonte da verdade), `themes/gradience/PeachOS.json`,
   `apply-theme-user.sh` (parte de usuário), `themes/grub/theme.txt`,
   `themes/plymouth/peachos.{plymouth,script}`,
-  `apply-theme-system.sh` (cobre GRUB + Plymouth; fontes GRUB via grub-mkfont/DejaVu),
-  `system/grub` com `GRUB_THEME` ativo e `splash` no cmdline.
+  `apply-theme-system.sh` (cobre GRUB + Plymouth + GDM; fontes GRUB via grub-mkfont/DejaVu),
+  `system/grub` com `GRUB_THEME` ativo e `splash` no cmdline,
+  `system/dconf/gdm.d/00-peachos.conf` (fundo deep_plum na tela de login).
 - Pendentes: logo SVG (adiado), wallpaper generator (adiado),
-  GDM, sons, expandir `apply-theme-system.sh` (GDM),
-  `apply-theme.sh` (orquestrador).
+  sons, `apply-theme.sh` (orquestrador).
 
 ### Fase 6 — Configuração das ferramentas
 Bruno, Lazygit, Beekeeper, Portainer, Zellij, tmux, Starship — cada um com config
@@ -329,11 +329,10 @@ só `dotfiles/peachd/` e o service file.
 
 Fases 1, 2, 3 e 4 concluídas. Fase 5 em andamento. Ordem sugerida:
 
-1. Fase 5 — GDM: tema de tela de login via `apply-theme-system.sh`.
-3. Fase 5 — `apply-theme.sh` (orquestrador que chama user + system).
-4. Fase 7 — `bootstrap.sh` (orquestrador completo: instala + aplica tema).
-5. Fase 7 — `docs/MIGRATION.md` (checklist VM → hardware físico).
-6. Pós-instalação na VM: criar dotfiles de extensões (Dash to Panel preset, gTile layouts)
+1. Fase 5 — `apply-theme.sh` (orquestrador que chama user + system).
+2. Fase 7 — `bootstrap.sh` (orquestrador completo: instala + aplica tema).
+3. Fase 7 — `docs/MIGRATION.md` (checklist VM → hardware físico).
+4. Pós-instalação na VM: criar dotfiles de extensões (Dash to Panel preset, gTile layouts)
    após ter o GNOME rodando e poder exportar as configurações reais.
 
 Consulte o `docs/PeachOS-Plano-Completo.docx` para o detalhamento de cada item.

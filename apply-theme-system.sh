@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # apply-theme-system.sh — PeachOS
 # Fase 5: aplica tema do sistema (precisa de sudo).
-# Cobertura atual: GRUB, Plymouth. GDM será adicionado em iteração seguinte.
+# Cobertura: GRUB, Plymouth, GDM.
 #
 # Para a parte de usuário (gsettings, Gradience, extensões) ver
 # apply-theme-user.sh.
@@ -24,6 +24,10 @@ FONT_BOLD="/usr/share/fonts/TTF/DejaVuSans-Bold.ttf"
 PLYMOUTH_THEME_SRC="${REPO_DIR}/themes/plymouth"
 PLYMOUTH_THEME_DEST="/usr/share/plymouth/themes/peachos"
 MKINITCPIO_CONF="/etc/mkinitcpio.conf"
+
+GDM_DCONF_SRC="${REPO_DIR}/system/dconf/gdm.d/00-peachos.conf"
+GDM_DCONF_DEST="/etc/dconf/db/gdm.d/00-peachos.conf"
+GDM_DCONF_PROFILE="/etc/dconf/profile/gdm"
 
 log()  { echo "  [theme-system] $*"; }
 fail() { echo "ERRO: $*" >&2; exit 1; }
@@ -133,12 +137,42 @@ apply_plymouth_theme() {
     plymouth-set-default-theme peachos --rebuild-initrd
 }
 
+apply_gdm_theme() {
+    log "=== GDM ==="
+
+    if [[ ! -f /usr/lib/systemd/system/gdm.service ]]; then
+        log "GDM não instalado — pulando."
+        log "Instale com: pacman -S gdm"
+        return
+    fi
+
+    if ! command -v dconf &>/dev/null; then
+        log "dconf não encontrado — pulando configuração do GDM."
+        return
+    fi
+
+    # Garante que o perfil dconf do GDM aponta para o banco 'gdm'.
+    # O GDM no Arch costuma criar este arquivo, mas se não existir é seguro criá-lo.
+    if [[ ! -f "${GDM_DCONF_PROFILE}" ]]; then
+        log "Criando perfil dconf do GDM em ${GDM_DCONF_PROFILE}"
+        mkdir -p "$(dirname "${GDM_DCONF_PROFILE}")"
+        printf 'user-db:user\nsystem-db:gdm\n' > "${GDM_DCONF_PROFILE}"
+    fi
+
+    log "Instalando configuração dconf em ${GDM_DCONF_DEST}"
+    mkdir -p "$(dirname "${GDM_DCONF_DEST}")"
+    install -m 0644 "${GDM_DCONF_SRC}" "${GDM_DCONF_DEST}"
+
+    log "Compilando banco dconf"
+    dconf update
+}
+
 # ── main ──────────────────────────────────────────────────────────────────────
 check_root
 log "Iniciando apply-theme-system (PeachOS)"
 
 apply_grub_theme
 apply_plymouth_theme
-# TODO Fase 5: apply_gdm_theme
+apply_gdm_theme
 
-log "Tema de sistema aplicado. Reinicie para ver o novo GRUB e o Plymouth."
+log "Tema de sistema aplicado. Reinicie para ver o GRUB, Plymouth e GDM com o tema PeachOS."
