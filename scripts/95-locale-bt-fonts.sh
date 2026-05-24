@@ -9,14 +9,14 @@ LOCALE="pt_BR.UTF-8"
 LANG_FILE="/etc/locale.conf"
 GEN_FILE="/etc/locale.gen"
 
-if ! grep -q "^${LOCALE}" "$GEN_FILE" 2>/dev/null; then
+if ! grep -qF "${LOCALE}" "$GEN_FILE" 2>/dev/null || grep -qF "#${LOCALE}" "$GEN_FILE" 2>/dev/null; then
     echo "  -> Habilitando locale ${LOCALE}..."
-    sed -i "s/^#${LOCALE}/${LOCALE}/" "$GEN_FILE"
+    sed -i "s|^#${LOCALE}|${LOCALE}|" "$GEN_FILE"
 fi
 
 # Garantir que en_US também está habilitado (algumas ferramentas dependem)
-if ! grep -q "^en_US.UTF-8" "$GEN_FILE" 2>/dev/null; then
-    sed -i 's/^#en_US.UTF-8/en_US.UTF-8/' "$GEN_FILE"
+if grep -qF "#en_US.UTF-8" "$GEN_FILE" 2>/dev/null; then
+    sed -i 's|^#en_US.UTF-8|en_US.UTF-8|' "$GEN_FILE"
 fi
 
 echo "  -> Gerando locales..."

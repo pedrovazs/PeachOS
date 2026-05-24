@@ -39,6 +39,10 @@ cp "$REPO_DIR/system/snapper/home.conf" /etc/snapper/configs/home
 # Verificar e ajustar se necessário
 if btrfs subvolume list / | grep -q '\.snapshots'; then
     echo "  -> Subvolume .snapshots detectado (correto)."
+else
+    echo "  AVISO: subvolume .snapshots não detectado. Snapper pode não ter conseguido criar."
+    echo "  Verifique manualmente: btrfs subvolume list /"
+    echo "  Se faltar, pode ser necessário criar: btrfs subvolume create /.snapshots"
 fi
 
 # --- timers ---
