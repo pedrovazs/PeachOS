@@ -54,6 +54,7 @@ sudo -v
 log "[2/6] Instalando pacotes oficiais"
 
 mapfile -t PKGS < <(read_list "$PKGLIST")
+[[ ${#PKGS[@]} -gt 0 ]] || fail "pkglist.txt sem pacotes válidos (só comentários ou vazio)."
 info "${#PKGS[@]} pacotes na lista."
 sudo pacman -S --needed --noconfirm "${PKGS[@]}"
 
@@ -76,8 +77,12 @@ fi
 log "[4/6] Instalando pacotes do AUR"
 
 mapfile -t AUR_PKGS < <(read_list "$AURLIST")
-info "${#AUR_PKGS[@]} pacotes no AUR list."
-paru -S --needed --noconfirm "${AUR_PKGS[@]}"
+if [[ ${#AUR_PKGS[@]} -eq 0 ]]; then
+    info "aurlist.txt vazio, pulando AUR."
+else
+    info "${#AUR_PKGS[@]} pacotes no AUR list."
+    paru -S --needed --noconfirm "${AUR_PKGS[@]}"
+fi
 
 # === 5. Runtimes de desenvolvimento ===
 log "[5/6] Configurando runtimes (Rust, Python, Node, Java)"

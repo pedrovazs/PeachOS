@@ -38,9 +38,11 @@ EOF
 
 # --- timezone ---
 TIMEZONE="America/Sao_Paulo"
+ZONEINFO="/usr/share/zoneinfo/${TIMEZONE}"
+[[ -f "$ZONEINFO" ]] || { echo "  ERRO: timezone ${ZONEINFO} não encontrado." >&2; exit 1; }
 if [[ "$(readlink /etc/localtime 2>/dev/null)" != *"$TIMEZONE"* ]]; then
     echo "  -> Configurando timezone ${TIMEZONE}..."
-    ln -sf "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime
+    ln -sf "$ZONEINFO" /etc/localtime
     hwclock --systohc
 fi
 

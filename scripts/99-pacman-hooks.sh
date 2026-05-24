@@ -15,20 +15,19 @@ if ! command -v paru &>/dev/null; then
     pacman -S --noconfirm --needed base-devel git
 
     TMPDIR=$(mktemp -d)
-    git clone https://aur.archlinux.org/paru.git "$TMPDIR/paru"
+    trap 'rm -rf "$TMPDIR"' EXIT
+    git clone --depth=1 https://aur.archlinux.org/paru.git "$TMPDIR/paru"
 
     # paru deve ser compilado como usuário normal — detectar quem chamou o script
     REAL_USER="${SUDO_USER:-$USER}"
     if [[ "$REAL_USER" == "root" ]]; then
         echo "  ERRO: paru não pode ser compilado como root."
         echo "  Execute este bloco como usuário comum com sudo, ou instale paru manualmente."
-        rm -rf "$TMPDIR"
         exit 1
     fi
 
     chown -R "$REAL_USER:$REAL_USER" "$TMPDIR"
     su - "$REAL_USER" -c "cd '$TMPDIR/paru' && makepkg -si --noconfirm"
-    rm -rf "$TMPDIR"
     echo "  -> paru instalado."
 else
     echo "  -> paru já instalado."
