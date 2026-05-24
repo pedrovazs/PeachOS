@@ -1,0 +1,83 @@
+{
+  "$schema": "https://gradience.app/schema/preset.json",
+  "name": "PeachOS",
+
+  "_comment_palette": "Cores derivadas do palette.json (fonte da verdade). Valores marcados com [derived] não estão no palette.json mas respeitam a identidade visual (variações de deep_plum para criar profundidade).",
+
+  "variables": {
+    "accent_color":              "#E8956D",
+    "accent_bg_color":           "#E8956D",
+    "accent_fg_color":           "#FFF8F5",
+
+    "destructive_color":         "#E8A0B8",
+    "destructive_bg_color":      "#E8A0B8",
+    "destructive_fg_color":      "#FFF8F5",
+
+    "success_color":             "#E8956D",
+    "success_bg_color":          "#E8956D",
+    "success_fg_color":          "#FFF8F5",
+
+    "warning_color":             "#F4C2B0",
+    "warning_bg_color":          "#F4C2B0",
+    "warning_fg_color":          "#2D2433",
+
+    "error_color":               "#E8A0B8",
+    "error_bg_color":            "#E8A0B8",
+    "error_fg_color":            "#FFF8F5",
+
+    "window_bg_color":           "#2D2433",
+    "window_fg_color":           "#FFF8F5",
+
+    "view_bg_color":             "#231C2D",
+    "view_fg_color":             "#FFF8F5",
+
+    "headerbar_bg_color":        "#231C2D",
+    "headerbar_fg_color":        "#FFF8F5",
+    "headerbar_border_color":    "rgba(0,0,0,0.8)",
+    "headerbar_backdrop_color":  "#2D2433",
+    "headerbar_shade_color":     "rgba(0,0,0,0.25)",
+
+    "sidebar_bg_color":          "#271E31",
+    "sidebar_fg_color":          "#FFF8F5",
+    "sidebar_border_color":      "rgba(0,0,0,0.5)",
+    "sidebar_backdrop_color":    "#2D2433",
+
+    "secondary_sidebar_bg_color": "#2D2433",
+    "secondary_sidebar_fg_color": "#FFF8F5",
+
+    "card_bg_color":             "#3A2F48",
+    "card_fg_color":             "#FFF8F5",
+    "card_shade_color":          "rgba(0,0,0,0.2)",
+
+    "thumbnail_bg_color":        "#2D2433",
+    "thumbnail_fg_color":        "#FFF8F5",
+
+    "dialog_bg_color":           "#3A2F48",
+    "dialog_fg_color":           "#FFF8F5",
+
+    "popover_bg_color":          "#3A2F48",
+    "popover_fg_color":          "#FFF8F5",
+
+    "shade_color":               "rgba(0,0,0,0.3)",
+    "scrollbar_outline_color":   "rgba(255,255,255,0.08)"
+  },
+
+  "palette": {
+    "blue_":    { "1": "#C4A8D4", "2": "#B899C8", "3": "#AC8ABC", "4": "#9F7BB0", "5": "#936CA4" },
+    "green_":   { "1": "#6B5B7A", "2": "#5E5070", "3": "#514566", "4": "#443A5C", "5": "#372F52" },
+    "yellow_":  { "1": "#FDEEE8", "2": "#F9E0D4", "3": "#F6D2C0", "4": "#F4C2B0", "5": "#F1B098" },
+    "orange_":  { "1": "#F4C2B0", "2": "#EFA894", "3": "#EB8E78", "4": "#E8956D", "5": "#E07B55" },
+    "red_":     { "1": "#F4C2C8", "2": "#EDA8B4", "3": "#E8A0B8", "4": "#E090A8", "5": "#D87898" },
+    "purple_":  { "1": "#FDEEE8", "2": "#C4A8D4", "3": "#6B5B7A", "4": "#3A2F48", "5": "#2D2433" },
+    "brown_":   { "1": "#F4C2B0", "2": "#EAB09A", "3": "#E09E84", "4": "#D68C6E", "5": "#CC7A58" },
+    "light_":   { "1": "#FFFFFF", "2": "#FDEEE8", "3": "#FFF8F5", "4": "#F5EEF0", "5": "#EDE4E7" },
+    "dark_":    { "1": "#6B5B7A", "2": "#4A3D5A", "3": "#3A2F48", "4": "#2D2433", "5": "#231C2D" }
+  },
+
+  "custom_css": {
+    "gtk4": "",
+    "gtk3": ""
+  },
+
+  "plugins": {}
+}
