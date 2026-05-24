@@ -134,3 +134,109 @@ yazi
 # === Tema (Fase 5) ===
 papirus-icon-theme
 plymouth
+# PeachOS — pacotes oficiais (pacman)
+# Organizado por fase. Cada nova fase adiciona seu bloco aqui.
+# Instalação: sudo pacman -S --needed $(grep -v '^\s*#' packages/pkglist.txt | grep -v '^\s*$')
+# Ou via install.sh (que lê este arquivo).
+
+# ============================================================
+# Fase 2 — Configuração base
+# (pacotes instalados pelos scripts em scripts/*.sh)
+# ============================================================
+
+# --- Áudio (PipeWire) ---
+pipewire
+pipewire-alsa
+pipewire-pulse
+pipewire-jack
+wireplumber
+pavucontrol
+
+# --- Drivers AMD (GPU integrada) ---
+mesa
+vulkan-radeon
+libva-mesa-driver
+mesa-vdpau
+xf86-video-amdgpu
+
+# --- Btrfs + snapshots ---
+btrfs-progs
+snapper
+grub-btrfs
+inotify-tools
+
+# --- Rede ---
+networkmanager
+network-manager-applet
+
+# --- Segurança ---
+firewalld
+firejail
+ufw
+apparmor
+
+# --- Performance ---
+earlyoom
+thermald
+zram-generator
+
+# --- Logs ---
+logrotate
+
+# --- Pacman / AUR helper bootstrap ---
+base-devel
+git
+
+# ============================================================
+# Fase 3 — Ambiente de desenvolvimento
+# ============================================================
+
+# --- Shell ---
+zsh
+zsh-autosuggestions
+zsh-history-substring-search
+zsh-syntax-highlighting
+starship
+
+# --- Terminal multiplexers ---
+tmux
+zellij
+
+# --- Unix tools modernos ---
+eza
+bat
+ripgrep
+fd
+fzf
+zoxide
+neovim
+
+# --- Clipboard Wayland (tmux, zellij, nvim) ---
+wl-clipboard
+
+# --- Gerenciadores de linguagem ---
+rustup
+pyenv
+fnm
+# Java: sdkman instalado via curl (não é pacote pacman)
+
+# --- Build deps para compilar CPython via pyenv ---
+openssl
+zlib
+xz
+tk
+libffi
+bzip2
+readline
+sqlite
+ncurses
+gdbm
+
+# --- Utilitários de download/scripts (sdkman bootstrap, install.sh) ---
+curl
+wget
+unzip
+zip
+
+# --- Aplicação de dotfiles ---
+stow
