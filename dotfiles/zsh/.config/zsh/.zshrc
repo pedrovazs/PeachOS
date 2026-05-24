@@ -58,7 +58,7 @@ command -v fzf      &>/dev/null && source <(fzf --zsh)
 
 # --- Gerenciadores de linguagem ---
 [[ -d "$PYENV_ROOT/bin" ]] && eval "$(pyenv init - zsh)"
-[[ -s "$FNM_DIR/fnm"   ]] && eval "$(fnm env --use-on-cd --shell zsh)"
+command -v fnm &>/dev/null && eval "$(fnm env --use-on-cd --shell zsh)"
 [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 
 # --- Aliases e funções (arquivos separados) ---
