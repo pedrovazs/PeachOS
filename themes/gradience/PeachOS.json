@@ -2,7 +2,7 @@
   "$schema": "https://gradience.app/schema/preset.json",
   "name": "PeachOS",
 
-  "_comment_palette": "Cores derivadas do palette.json (fonte da verdade). Valores marcados com [derived] não estão no palette.json mas respeitam a identidade visual (variações de deep_plum para criar profundidade).",
+  "_comment_palette": "Cores derivadas do palette.json (fonte da verdade). Três valores derivados intencionais não vivem no palette.json mas estão documentados no CLAUDE.md ponto #17 (#231C2D, #271E31, #3A2F48 — variações de deep_plum para profundidade). As ramps coloridas (blue_/green_/red_/yellow_/orange_/purple_/brown_/light_/dark_) também são derivações intencionais que estendem a paleta para cobrir o sistema semântico do libadwaita (variantes claras/escuras de cada cor). Mudanças na paleta oficial devem ser propagadas manualmente aqui.",
 
   "variables": {
     "accent_color":              "#E8956D",

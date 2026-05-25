@@ -1,6 +1,10 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-# Paleta oficial PeachOS (fonte da verdade: themes/palette.json)
+# Paleta oficial PeachOS (fonte da verdade: themes/palette.json).
+# Nota ANSI 2/6 (CLAUDE.md #13): a paleta não tem verde nem ciano. Quando o
+# starship cair em cor ANSI no terminal (ghostty/zellij), ANSI 2 (green) renderiza
+# como muted_plum e ANSI 6 (cyan) como grub_accent — mapeamento aplicado nesses
+# emuladores. Aqui no starship preferimos sempre referenciar os nomes da paleta.
 palette = 'peachos'
 
 [palettes.peachos]

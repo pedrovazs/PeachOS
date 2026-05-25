@@ -34,9 +34,9 @@ O desenvolvimento está dividido em 8 fases. O detalhamento completo está em
 | 1 | Preparar a máquina virtual | ✅ Concluída |
 | 2 | Instalação e configuração base do Arch | ✅ Concluída |
 | 3 | Ambiente de desenvolvimento | ✅ Concluída |
-| 4 | Instalação e configuração do GNOME | Planejada |
-| 5 | Identidade visual | Paleta definida |
-| 6 | Configuração das ferramentas | Planejada |
+| 4 | Instalação e configuração do GNOME | ✅ Concluída (artefatos) |
+| 5 | Identidade visual | 🚧 Em andamento (paleta, Gradience, GRUB, Plymouth, GDM, scripts prontos) |
+| 6 | Configuração das ferramentas | Parcial (coberta pela Fase 3 em parte) |
 | 7 | Estabilização e documentação | Planejada |
 | 8 | Camada de IA | Planejada |
 
@@ -77,9 +77,9 @@ peachos-config/
 
 ## Como usar
 
-> ⚠️ O `bootstrap.sh` (orquestrador final) ainda não existe — está previsto para
-> a Fase 7. Por enquanto, os scripts de bloco da Fase 2 e o `install.sh` da
-> Fase 3 são executados em sequência.
+> ⚠️ O `bootstrap.sh` (orquestrador completo) ainda não existe — está previsto
+> para a Fase 7. Até lá, os scripts da Fase 2, o `install.sh` (Fase 3) e o
+> `apply-theme.sh` (Fase 5) são executados em sequência.
 
 A instalação base do Arch é feita manualmente via `archinstall`. Depois:
 
@@ -93,10 +93,13 @@ sudo bash scripts/20-audio.sh
 # ... e assim por diante até scripts/99-pacman-hooks.sh
 
 # Fase 3: instalar pacotes, runtimes e aplicar dotfiles
-./install.sh    # roda como usuário comum; chama sudo quando precisa
+./install.sh        # roda como usuário comum; chama sudo quando precisa
+
+# Fase 5: aplicar a identidade visual (sessão GNOME + GRUB/Plymouth/GDM)
+./apply-theme.sh    # parte de sistema solicita sudo internamente
 ```
 
-O `install.sh` é idempotente — pode rodar mais de uma vez sem quebrar.
+Os scripts são idempotentes — podem rodar mais de uma vez sem quebrar.
 
 ## Licença
 

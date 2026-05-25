@@ -258,8 +258,9 @@ main() {
     info "  2. (Opcional) sdk install java 21-tem"
     info "  3. Instalar extensões do VS Code listadas em CLAUDE.md nota 16."
     info "  4. Aplicar tema visual (Fase 5):"
-    info "       ./apply-theme-user.sh   (parte de usuário)"
-    info "       ./apply-theme-system.sh (parte de sistema — ainda a criar)"
+    info "       ./apply-theme.sh                  (user + system, recomendado)"
+    info "       ./apply-theme.sh --user-only      (só sessão do usuário)"
+    info "       ./apply-theme.sh --system-only    (só GRUB + Plymouth + GDM)"
 }
 
 main "$@"

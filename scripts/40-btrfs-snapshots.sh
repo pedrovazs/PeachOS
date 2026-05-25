@@ -55,9 +55,14 @@ systemctl enable --now snapper-cleanup.timer
 echo "  -> Habilitando grub-btrfsd.service (monitora novos snapshots)..."
 systemctl enable --now grub-btrfsd.service
 
-# Criar snapshot inicial antes de gerar GRUB
-echo "  -> Criando snapshot inicial de root..."
-snapper -c root create --description "pós-instalação fase2-bloco4"
+# Criar snapshot inicial antes de gerar GRUB (idempotente — só na 1ª execução)
+SNAPSHOT_DESC="pós-instalação fase2-bloco4"
+if snapper -c root list 2>/dev/null | grep -qF "${SNAPSHOT_DESC}"; then
+    echo "  -> Snapshot inicial já existe, pulando criação."
+else
+    echo "  -> Criando snapshot inicial de root..."
+    snapper -c root create --description "${SNAPSHOT_DESC}"
+fi
 
 echo ""
 echo "  -> Gerando grub.cfg com entradas de snapshots..."

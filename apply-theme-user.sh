@@ -70,7 +70,7 @@ enable_extensions() {
         return
     fi
 
-    # IDs das 13 extensões PeachOS (devem estar instaladas via paru)
+    # IDs das 12 extensões PeachOS (devem estar instaladas via paru)
     local extensions=(
         "user-theme@gnome-shell-extensions.gcampax.github.com"
         "appindicatorsupport@rgcjonas.gmail.com"
