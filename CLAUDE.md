@@ -138,41 +138,42 @@ peachos-config/
 │   ├── zellij/.config/zellij/config.kdl
 │   ├── tmux/.tmux.conf
 │   ├── vscode/settings.json
-│   └── peachd/.config/peachos/   # config do daemon + index-ignore (Fase 8)
+│   └── peachd/.config/peachos/   # [planejado Fase 8] config do daemon
 │
 ├── themes/
 │   ├── palette.json
-│   ├── logo/               # SVGs da logo
 │   ├── gradience/          # preset libadwaita
-│   ├── gnome-shell/        # CSS do shell theme
-│   ├── grub/               # theme.txt + logo.png
-│   ├── plymouth/
-│   └── wallpapers/
-│       └── generate.py     # gerador Python + Cairo
+│   ├── grub/               # theme.txt
+│   ├── plymouth/           # peachos.{plymouth,script}
+│   ├── logo/               # [planejado] SVGs da logo
+│   ├── gnome-shell/        # [planejado] CSS do shell theme
+│   └── wallpapers/         # [planejado] generate.py (Python + Cairo)
 │
-├── sounds/PeachOS/stereo/  # som de notificação
+├── sounds/PeachOS/stereo/  # [planejado] som de notificação
 │
 ├── system/                 # arquivos copiados para /etc e afins
-│   ├── os-release
-│   ├── hostname
 │   ├── sysctl.conf
 │   ├── journald.conf
 │   ├── zram-generator.conf
 │   ├── reflector.conf
-│   ├── docker/daemon.json
 │   ├── udev/60-ioschedulers.rules
 │   ├── grub                # /etc/default/grub
 │   ├── snapper/{root,home}.conf
-│   └── pacman/{pacman.conf,paru.conf,hooks/}
+│   ├── pacman/{pacman.conf,paru.conf,hooks/}
+│   ├── dconf/gdm.d/00-peachos.conf
+│   ├── os-release          # [planejado]
+│   ├── hostname            # [planejado]
+│   └── docker/daemon.json  # [planejado]
 │
 ├── security/
-│   ├── firewalld/
 │   ├── aide.conf
-│   └── sshd_config
+│   ├── sshd_config
+│   └── firewalld/          # [planejado]
 │
 └── packages/
-    ├── pkglist.txt         # pacotes oficiais (pacman)
-    └── aurlist.txt         # pacotes AUR
+    ├── pkglist.txt              # pacotes oficiais (pacman)
+    ├── aurlist.txt              # pacotes AUR
+    └── vscode-extensions.txt    # extensões obrigatórias do VS Code
 ```
 
 ---
@@ -201,12 +202,12 @@ fzf, ripgrep, fd, bat, eza, zoxide, neovim. Shell: zsh + starship + plugins.
 ### Fase 4 — GNOME
 GNOME mínimo, apps (Ghostty, Nautilus+Yazi, Loupe, Evince, VS Code, Bruno,
 Portainer+Lazydocker, Beekeeper, Lazygit, Firefox), fontes (JetBrains Mono Nerd +
-Noto), Papirus, 13 extensões, theming.
+Noto), Papirus, 12 extensões, theming.
 **STATUS: concluída (artefatos).** Artefatos:
 - `packages/pkglist.txt` — seção GNOME finalizada (núcleo + gvfs + polkit-gnome + extensões oficiais).
-- `packages/aurlist.txt` — 11 extensões AUR + Night Theme Switcher (13 total com as 2 do repo oficial).
+- `packages/aurlist.txt` — 10 extensões AUR (12 total com as 2 do repo oficial: appindicator e user-themes).
 - `themes/gradience/PeachOS.json` — preset libadwaita completo com a paleta PeachOS.
-- `apply-theme-user.sh` — aplica dark mode, ícones, fontes, Gradience, ativa 13 extensões e configura Night Theme Switcher.
+- `apply-theme-user.sh` — aplica dark mode, ícones, fontes, Gradience, ativa 12 extensões e configura Night Theme Switcher.
 - Logo e wallpaper: adiados conscientemente. Usando só o nome "PeachOS" por ora.
 - Pendente (em produção): dotfiles específicos de extensões (Dash to Panel, gTile layouts) — criados após a instalação real.
 
@@ -219,9 +220,9 @@ Paleta, logo, wallpaper (Python+Cairo), Plymouth, GDM, GRUB tema, sons, VS Code
   `themes/plymouth/peachos.{plymouth,script}`,
   `apply-theme-system.sh` (cobre GRUB + Plymouth + GDM; fontes GRUB via grub-mkfont/DejaVu),
   `system/grub` com `GRUB_THEME` ativo e `splash` no cmdline,
-  `system/dconf/gdm.d/00-peachos.conf` (fundo deep_plum na tela de login).
-- Pendentes: logo SVG (adiado), wallpaper generator (adiado),
-  sons, `apply-theme.sh` (orquestrador).
+  `system/dconf/gdm.d/00-peachos.conf` (fundo deep_plum na tela de login),
+  `apply-theme.sh` (orquestrador: chama user + system, aceita --user-only / --system-only).
+- Pendentes: logo SVG (adiado), wallpaper generator (adiado), sons.
 
 ### Fase 6 — Configuração das ferramentas
 Bruno, Lazygit, Beekeeper, Portainer, Zellij, tmux, Starship — cada um com config
@@ -274,14 +275,15 @@ só `dotfiles/peachd/` e o service file.
     Em zellij e ghostty, essas posições ANSI são mapeadas para `muted_plum (#6B5B7A)`
     e `grub_accent (#F1B098)` respectivamente. Decisão consciente — fica documentado
     no próprio arquivo de config de cada ferramenta.
-14. **delta como pager do lazygit:** requer `delta` instalado (`pacman -S git-delta`).
-    Incluir em `packages/pkglist.txt` quando esse arquivo for criado.
+14. **delta como pager do lazygit:** requer `delta` instalado (pacote `git-delta`).
+    Já listado em `packages/pkglist.txt`.
 15. **wl-clipboard:** dependência de runtime de tmux, zellij e lazygit para copy/paste
-    no Wayland. Incluir em `packages/pkglist.txt` (`pacman -S wl-clipboard`).
+    no Wayland. Já listado em `packages/pkglist.txt`.
 16. **Extensões obrigatórias do VS Code** (referenciadas no `settings.json`):
     `Catppuccin.catppuccin-vsc`, `Catppuccin.catppuccin-vsc-icons`,
     `esbenp.prettier-vscode`, `charliermarsh.ruff`, `rust-lang.rust-analyzer`.
-    Quando `packages/` for criado, adicionar uma lista `vscode-extensions.txt`.
+    Lista mantida em `packages/vscode-extensions.txt`; instala com
+    `cat packages/vscode-extensions.txt | xargs -L 1 code --install-extension`.
 17. **Gradience preset — cores derivadas:** o arquivo `themes/gradience/PeachOS.json`
     usa 3 valores hex derivados (não no `palette.json`): `#231C2D` (headerbar/view bg,
     10% mais escuro que deep_plum), `#271E31` (sidebar bg) e `#3A2F48` (card/dialog/popover
@@ -329,10 +331,9 @@ só `dotfiles/peachd/` e o service file.
 
 Fases 1, 2, 3 e 4 concluídas. Fase 5 em andamento. Ordem sugerida:
 
-1. Fase 5 — `apply-theme.sh` (orquestrador que chama user + system).
-2. Fase 7 — `bootstrap.sh` (orquestrador completo: instala + aplica tema).
-3. Fase 7 — `docs/MIGRATION.md` (checklist VM → hardware físico).
-4. Pós-instalação na VM: criar dotfiles de extensões (Dash to Panel preset, gTile layouts)
+1. Fase 7 — `bootstrap.sh` (orquestrador completo: instala + aplica tema).
+2. Fase 7 — `docs/MIGRATION.md` (checklist VM → hardware físico).
+3. Pós-instalação na VM: criar dotfiles de extensões (Dash to Panel preset, gTile layouts)
    após ter o GNOME rodando e poder exportar as configurações reais.
 
 Consulte o `docs/PeachOS-Plano-Completo.docx` para o detalhamento de cada item.

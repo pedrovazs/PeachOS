@@ -1,0 +1,18 @@
+# PeachOS — extensões obrigatórias do VS Code
+#
+# Como instalar:
+#   cat packages/vscode-extensions.txt | grep -vE '^\s*(#|$)' | xargs -L 1 code --install-extension
+#
+# Referenciadas em dotfiles/vscode/settings.json (ver CLAUDE.md ponto #16).
+# Sem essas extensões instaladas, o tema Catppuccin e os formatters não funcionam.
+
+# Tema + ícones (Fase 5 — identidade visual)
+Catppuccin.catppuccin-vsc
+Catppuccin.catppuccin-vsc-icons
+
+# Formatters / linters
+esbenp.prettier-vscode
+charliermarsh.ruff
+
+# Linguagens
+rust-lang.rust-analyzer
