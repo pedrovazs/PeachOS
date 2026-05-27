@@ -303,6 +303,15 @@ só `dotfiles/peachd/` e o service file.
 21. **adw-gtk3:** pacote do tema GTK3 com look libadwaita. Referenciado em
     `apply-theme-user.sh` (define como `gtk-theme`). Está em `pkglist.txt` desde Fase 4.
     Sem ele, o fallback é `Adwaita-dark` (cores genéricas do GNOME, não a paleta PeachOS).
+22. **Senha do GRUB (pendente):** sem senha, acesso físico permite editar entradas de boot
+    e obter shell root sem autenticação (`init=/bin/bash`). Mitigado pelo LUKS no hardware
+    físico, mas crítico na VM e em partições sem criptografia. Para implementar:
+    `grub-mkpasswd-pbkdf2` → adicionar `set superusers` e `password_pbkdf2` em
+    `/etc/grub.d/40_custom` → entradas normais com `--unrestricted`. Não automatizado
+    aqui por exigir a senha em texto plano no script ou interação manual.
+23. **sdkman — curl|bash sem checksum:** único download fora do pacman/paru. HTTPS presente
+    mas sem verificação de integridade. Risco baixo no cotidiano; em reinstalação em
+    ambiente hostil, verificar o hash em https://github.com/sdkman/sdkman-cli/releases.
 
 ---
 

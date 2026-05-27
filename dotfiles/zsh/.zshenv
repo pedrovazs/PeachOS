@@ -7,3 +7,7 @@ export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
+# Arquivos criados pelo usuário não ficam legíveis por outros (600/700).
+# Ferramentas que precisem de 644 podem sobrescrever localmente.
+umask 077

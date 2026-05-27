@@ -123,7 +123,8 @@
 
   // ===== Extensões: respeito a defaults =====
   "extensions.ignoreRecommendations": false,
-  "extensions.autoUpdate": true,
+  "extensions.autoUpdate": false,
+  "extensions.autoCheckUpdates": true,
 
   // ===== Linguagens =====
 
@@ -210,5 +211,5 @@
   // ===== Outros =====
   "breadcrumbs.enabled": true,
   "problems.decorations.enabled": true,
-  "security.workspace.trust.untrustedFiles": "open"
+  "security.workspace.trust.untrustedFiles": "prompt"
 }

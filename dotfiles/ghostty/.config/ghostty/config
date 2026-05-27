@@ -19,12 +19,12 @@ gtk-wide-tabs = false
 
 # --- comportamento ---
 shell-integration = zsh
-shell-integration-features = cursor,sudo,title
+shell-integration-features = cursor,sudo
 copy-on-select = false
 mouse-hide-while-typing = true
 confirm-close-surface = false
 scrollback-limit = 10000000
-clipboard-read = allow
+clipboard-read = ask
 clipboard-write = allow
 clipboard-trim-trailing-spaces = true
 

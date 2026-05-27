@@ -66,6 +66,7 @@ fi
 
 echo ""
 echo "  -> Gerando grub.cfg com entradas de snapshots..."
+mountpoint -q /boot || { echo "  ERRO: /boot não está montado. Monte antes de gerar o grub.cfg."; exit 1; }
 grub-mkconfig -o /boot/grub/grub.cfg
 
 echo "==> [40] Concluído."
