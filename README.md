@@ -77,9 +77,7 @@ peachos-config/
 
 ## Como usar
 
-> ⚠️ O `bootstrap.sh` (orquestrador completo) ainda não existe — está previsto
-> para a Fase 7. Até lá, os scripts da Fase 2, o `install.sh` (Fase 3) e o
-> `apply-theme.sh` (Fase 5) são executados em sequência.
+> O `bootstrap.sh` orquestra as Fases 3 e 5 em sequência após a Fase 2 manual.
 
 A instalação base do Arch é feita manualmente via `archinstall`. Depois:
 
@@ -92,11 +90,8 @@ sudo bash scripts/10-mirrors-pacman.sh
 sudo bash scripts/20-audio.sh
 # ... e assim por diante até scripts/99-pacman-hooks.sh
 
-# Fase 3: instalar pacotes, runtimes e aplicar dotfiles
-./install.sh        # roda como usuário comum; chama sudo quando precisa
-
-# Fase 5: aplicar a identidade visual (sessão GNOME + GRUB/Plymouth/GDM)
-./apply-theme.sh    # parte de sistema solicita sudo internamente
+# Fases 3 + 5: pacotes, dotfiles e tema visual de uma vez
+./bootstrap.sh      # chama install.sh + apply-theme.sh em sequência
 ```
 
 Os scripts são idempotentes — podem rodar mais de uma vez sem quebrar.
