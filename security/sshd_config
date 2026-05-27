@@ -20,6 +20,7 @@ AcceptEnv LANG LC_*
 # Segurança
 MaxAuthTries 3
 LoginGraceTime 30
+# AllowUsers seu_usuario   # descomente e substitua antes de habilitar o sshd
 ClientAliveInterval 300
 ClientAliveCountMax 2
 

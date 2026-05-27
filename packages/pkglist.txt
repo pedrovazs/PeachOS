@@ -60,7 +60,7 @@ zram-generator
 
 # === Rede (Fase 2, bloco 90) ===
 avahi
-bind
+bind-tools
 networkmanager
 networkmanager-openvpn
 nmap

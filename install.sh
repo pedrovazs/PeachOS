@@ -160,7 +160,8 @@ setup_fnm() {
         warn "fnm não disponível, pulando configuração do Node."
         return
     fi
-    eval "$(fnm env --shell bash)" 2>/dev/null || true
+    # shellcheck disable=SC1090  # source de saída de processo local e conhecido
+    source <(fnm env --shell bash) 2>/dev/null || true
     if fnm list 2>/dev/null | grep -qE 'v[0-9]+\.[0-9]+\.[0-9]+'; then
         ok "fnm: alguma versão do Node já instalada."
         return
@@ -180,6 +181,10 @@ setup_sdkman() {
     fi
     info "Bootstrap do sdkman em $sdkman_dir"
     # rcupdate=false: não toca em ~/.zshrc; a integração já está em dotfiles/zsh
+    # Risco: sdkman não publica checksums oficiais; este pipe-to-bash é um vetor
+    # de ataque em caso de DNS poisoning ou servidor comprometido. HTTPS mitiga,
+    # mas não elimina. Para reinstalações em ambiente hostil, verificar o hash
+    # em https://github.com/sdkman/sdkman-cli/releases antes de executar.
     export SDKMAN_DIR="$sdkman_dir"
     curl -fsSL "https://get.sdkman.io?rcupdate=false" | bash
     ok "sdkman instalado. Use \`sdk install java 21-tem\` (ou outra versão)."
@@ -209,9 +214,10 @@ apply_dotfiles() {
     command -v stow &>/dev/null || die "stow não está instalado (deveria estar no pkglist)."
     info "Aplicando dotfiles via stow ($DOTFILES_DIR → \$HOME)"
 
-    local stow_err pkg conflicts=0
-    stow_err=$(mktemp)
-    TMPDIRS+=("$(dirname "$stow_err")")
+    local stow_tmp stow_err pkg conflicts=0
+    stow_tmp=$(mktemp -d)
+    TMPDIRS+=("$stow_tmp")
+    stow_err="$stow_tmp/stow.err"
 
     for pkg in "$DOTFILES_DIR"/*/; do
         pkg=$(basename "$pkg")

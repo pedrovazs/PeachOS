@@ -25,6 +25,12 @@ if ! command -v paru &>/dev/null; then
         echo "  Execute este bloco como usuário comum com sudo, ou instale paru manualmente."
         exit 1
     fi
+    # Sanitização: nome de usuário deve ser alfanumérico/hífen/underscore.
+    # Evita quebra do su -c '...' caso o nome contenha apóstrofo ou metacaractere.
+    if [[ ! "$REAL_USER" =~ ^[a-zA-Z0-9_-]+$ ]]; then
+        echo "  ERRO: nome de usuário inválido: '$REAL_USER'. Instale paru manualmente."
+        exit 1
+    fi
 
     chown -R "$REAL_USER:$REAL_USER" "$PARU_TMP"
     su - "$REAL_USER" -c "cd '$PARU_TMP/paru' && makepkg -si --noconfirm"

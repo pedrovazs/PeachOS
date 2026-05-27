@@ -233,7 +233,9 @@ Pendentes: Bruno, Beekeeper, configurações específicas de Portainer.
 ### Fase 7 — Estabilização e documentação
 README, MIGRATION.md, snapshots estratégicos, checklist de migração, scripts
 `install.sh`/`apply-theme.sh`/`bootstrap.sh` finalizados.
-**STATUS: planejada.** Artefatos: `README.md` (existe, parcial), `docs/MIGRATION.md`, scripts raiz.
+**STATUS: em andamento.** Artefatos: `README.md` (atualizado), `bootstrap.sh` (concluído),
+`docs/MIGRATION.md` (checklist completo VM → hardware físico).
+Pendente: validação em campo (migração real ainda não executada).
 
 ### Fase 8 — Camada de IA
 Daemon `peachd` (Python, systemd de usuário, socket Unix, API Anthropic), clientes
@@ -301,6 +303,15 @@ só `dotfiles/peachd/` e o service file.
 21. **adw-gtk3:** pacote do tema GTK3 com look libadwaita. Referenciado em
     `apply-theme-user.sh` (define como `gtk-theme`). Está em `pkglist.txt` desde Fase 4.
     Sem ele, o fallback é `Adwaita-dark` (cores genéricas do GNOME, não a paleta PeachOS).
+22. **Senha do GRUB (pendente):** sem senha, acesso físico permite editar entradas de boot
+    e obter shell root sem autenticação (`init=/bin/bash`). Mitigado pelo LUKS no hardware
+    físico, mas crítico na VM e em partições sem criptografia. Para implementar:
+    `grub-mkpasswd-pbkdf2` → adicionar `set superusers` e `password_pbkdf2` em
+    `/etc/grub.d/40_custom` → entradas normais com `--unrestricted`. Não automatizado
+    aqui por exigir a senha em texto plano no script ou interação manual.
+23. **sdkman — curl|bash sem checksum:** único download fora do pacman/paru. HTTPS presente
+    mas sem verificação de integridade. Risco baixo no cotidiano; em reinstalação em
+    ambiente hostil, verificar o hash em https://github.com/sdkman/sdkman-cli/releases.
 
 ---
 
@@ -331,9 +342,7 @@ só `dotfiles/peachd/` e o service file.
 
 Fases 1, 2, 3 e 4 concluídas. Fase 5 em andamento. Ordem sugerida:
 
-1. Fase 7 — `bootstrap.sh` (orquestrador completo: instala + aplica tema).
-2. Fase 7 — `docs/MIGRATION.md` (checklist VM → hardware físico).
-3. Pós-instalação na VM: criar dotfiles de extensões (Dash to Panel preset, gTile layouts)
+1. Pós-instalação na VM: criar dotfiles de extensões (Dash to Panel preset, gTile layouts)
    após ter o GNOME rodando e poder exportar as configurações reais.
 
 Consulte o `docs/PeachOS-Plano-Completo.docx` para o detalhamento de cada item.

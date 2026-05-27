@@ -32,6 +32,7 @@ os-prober || true  # os-prober retorna 1 se não encontrar nada, não é erro fa
 
 # --- regenerar grub.cfg ---
 echo "  -> Gerando grub.cfg..."
+mountpoint -q /boot || { echo "  ERRO: /boot não está montado. Monte antes de gerar o grub.cfg."; exit 1; }
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # Verificar se Windows foi detectado
