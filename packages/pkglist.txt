@@ -54,6 +54,8 @@ os-prober
 aide
 firejail
 firewalld
+lynis
+rkhunter
 
 # === Performance (Fase 2, bloco 70) ===
 zram-generator
@@ -90,14 +92,23 @@ zsh-syntax-highlighting
 
 # === CLI moderna (Fase 3) ===
 bat
+btop
 eza
 fd
 fzf
 git-delta
+github-cli
+go-yq
+jq
 lazygit
+ncdu
 neovim
 ripgrep
+shellcheck
+shfmt
+tealdeer
 wl-clipboard
+xh
 zoxide
 
 # === Runtimes de desenvolvimento (Fase 3) ===
@@ -143,7 +154,11 @@ gnome-shell-extensions
 
 # === Apps (Fase 4) ===
 evince
+file-roller
 firefox
+p7zip
+pdfarranger
+unrar
 yazi
 
 # === Tema (Fase 5) ===
