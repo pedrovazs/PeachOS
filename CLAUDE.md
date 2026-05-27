@@ -233,8 +233,9 @@ Pendentes: Bruno, Beekeeper, configurações específicas de Portainer.
 ### Fase 7 — Estabilização e documentação
 README, MIGRATION.md, snapshots estratégicos, checklist de migração, scripts
 `install.sh`/`apply-theme.sh`/`bootstrap.sh` finalizados.
-**STATUS: em andamento.** Artefatos: `README.md` (atualizado), `bootstrap.sh` (concluído).
-Pendente: `docs/MIGRATION.md` (checklist VM → hardware físico).
+**STATUS: em andamento.** Artefatos: `README.md` (atualizado), `bootstrap.sh` (concluído),
+`docs/MIGRATION.md` (checklist completo VM → hardware físico).
+Pendente: validação em campo (migração real ainda não executada).
 
 ### Fase 8 — Camada de IA
 Daemon `peachd` (Python, systemd de usuário, socket Unix, API Anthropic), clientes
@@ -332,8 +333,7 @@ só `dotfiles/peachd/` e o service file.
 
 Fases 1, 2, 3 e 4 concluídas. Fase 5 em andamento. Ordem sugerida:
 
-1. Fase 7 — `docs/MIGRATION.md` (checklist VM → hardware físico).
-3. Pós-instalação na VM: criar dotfiles de extensões (Dash to Panel preset, gTile layouts)
+1. Pós-instalação na VM: criar dotfiles de extensões (Dash to Panel preset, gTile layouts)
    após ter o GNOME rodando e poder exportar as configurações reais.
 
 Consulte o `docs/PeachOS-Plano-Completo.docx` para o detalhamento de cada item.
