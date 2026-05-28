@@ -9,7 +9,11 @@ LOCALE="pt_BR.UTF-8"
 LANG_FILE="/etc/locale.conf"
 GEN_FILE="/etc/locale.gen"
 
-if ! grep -qF "${LOCALE}" "$GEN_FILE" 2>/dev/null || grep -qF "#${LOCALE}" "$GEN_FILE" 2>/dev/null; then
+# Descomenta pt_BR.UTF-8 se estiver comentado ou ausente.
+# grep -qF busca a string sem âncora: encontra tanto "#pt_BR..." quanto "pt_BR...".
+# Se só a versão ativa está presente (!grep FALSE, 2ª cond FALSE) → sed não roda (correto).
+if ! grep -qF "${LOCALE}" "$GEN_FILE" 2>/dev/null \
+    || grep -qF "#${LOCALE}" "$GEN_FILE" 2>/dev/null; then
     echo "  -> Habilitando locale ${LOCALE}..."
     sed -i "s|^#${LOCALE}|${LOCALE}|" "$GEN_FILE"
 fi

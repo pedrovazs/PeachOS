@@ -22,7 +22,7 @@ fi
 NET_PKGS=(
     networkmanager-openvpn  # suporte VPN
     nss-mdns                # mDNS / .local hostnames
-    bind                    # dig
+    bind-tools              # dig, nslookup, host
     traceroute
     nmap
     wget

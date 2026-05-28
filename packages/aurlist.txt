@@ -10,8 +10,8 @@
 fnm-bin
 
 # === IDE (Fase 4) ===
-# Build da Microsoft (com LiveShare, Settings Sync e Pylance).
-# Para a versão open source, basta usar `code` (no pkglist.txt).
+# Build da Microsoft — instala o binário `code`. Inclui LiveShare, Settings Sync e Pylance.
+# Alternativa open source: pacote `code` do repositório oficial (sem as extensões proprietárias).
 visual-studio-code-bin
 
 # === API / DB tools (Fase 4) ===

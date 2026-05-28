@@ -109,7 +109,7 @@ peachos-config/
 ├── CLAUDE.md               # este arquivo
 ├── README.md               # porta de entrada para humanos
 ├── docs/
-│   └── PeachOS-Plano-Completo.docx   # plano detalhado das 8 fases
+│   └── MIGRATION.md           # checklist VM → hardware físico
 │
 ├── bootstrap.sh            # orquestrador: clona e roda install + apply-theme
 ├── install.sh              # instala pacotes + configs de sistema
@@ -180,8 +180,7 @@ peachos-config/
 
 ## As 8 fases — roadmap de implementação
 
-Cada fase está detalhada no `docs/PeachOS-Plano-Completo.docx`. Resumo do escopo e
-do estado de cada uma. Atualize o STATUS conforme avançar.
+Resumo do escopo e do estado de cada fase. Atualize o STATUS conforme avançar.
 
 ### Fase 1 — Preparar a VM
 VirtualBox/QEMU, 8GB RAM, 60GB disco, UEFI, VT-x/AMD-V.
@@ -345,4 +344,3 @@ Fases 1, 2, 3 e 4 concluídas. Fase 5 em andamento. Ordem sugerida:
 1. Pós-instalação na VM: criar dotfiles de extensões (Dash to Panel preset, gTile layouts)
    após ter o GNOME rodando e poder exportar as configurações reais.
 
-Consulte o `docs/PeachOS-Plano-Completo.docx` para o detalhamento de cada item.
